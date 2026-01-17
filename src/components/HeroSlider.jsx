@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+// Import lokalnih podataka i stilova
+import heroData from '../data/heroData.json';
+import './HeroSlider.css';
 
 // Swiper stilovi
 import 'swiper/css';
@@ -8,17 +12,8 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const HeroSlider = () => {
-  const [slides, setSlides] = useState([]);
-
-  useEffect(() => {
-    // Dohvaćamo objave iz kategorije 59 (Hero Slider)
-    fetch("https://front2.edukacija.online/wp-json/wp/v2/posts?categories=59&_embed")
-      .then(res => res.json())
-      .then(data => setSlides(data));
-  }, []);
-
   return (
-    <div className="hero-slider-wrapper">
+    <section className="hero-section">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         slidesPerView={1}
@@ -26,33 +21,30 @@ const HeroSlider = () => {
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000 }}
       >
-        {slides.map(slide => (
+        {heroData.map(slide => (
           <SwiperSlide key={slide.id}>
-            <div className="container py-5">
-              <div className="row align-items-center" style={{ minHeight: '500px' }}>
+            <div className="container hero-slide-container">
+              <div className="row align-items-center">
                 
-                {/* Slika lijevo */}
-                <div className="col-md-6 text-center">
+                <div className="col-md-6">
                   <img 
-                    src={slide._embedded?.['wp:featuredmedia']?.[0]?.source_url} 
+                    src={slide.image} 
                     alt={slide.title.rendered}
-                    className="img-fluid rounded shadow"
-                    style={{ maxHeight: '450px', objectFit: 'cover' }}
+                    className="hero-image shadow-lg"
                   />
                 </div>
 
-                {/* Tekst desno */}
-                <div className="col-md-6 px-lg-5">
-                  <h1 className="display-4 fw-bold text-dark">
+                <div className="col-md-6 ps-md-5">
+                  <h1 className="hero-title display-4 mb-4">
                     {slide.title.rendered}
                   </h1>
                   <div 
-                    className="lead my-4 text-muted"
+                    className="hero-text mb-4"
                     dangerouslySetInnerHTML={{ __html: slide.content.rendered }} 
                   />
                   <div className="d-flex gap-3">
-                    <button className="btn btn-primary btn-lg">Torte</button>
-                    <button className="btn btn-outline-dark btn-lg">Kolači</button>
+                    <button className="btn-miki-primary">Torte</button>
+                    <button className="btn-miki-primary">Kolači</button>
                   </div>
                 </div>
 
@@ -61,7 +53,7 @@ const HeroSlider = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </section>
   );
 };
 

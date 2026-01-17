@@ -1,0 +1,45 @@
+/* HeroSlider.css */
+.hero-section {
+  background-color: #fcfcfc;
+  overflow: hidden;
+}
+
+.hero-slide-container {
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-image {
+  max-height: 500px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.5s ease;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif; /* Primjer luksuznog fonta */
+  font-weight: 700;
+  color: #333;
+}
+
+.hero-text {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.btn-miki-primary {
+  background-color: transparent;
+  border: 2px solid #555;
+  color: #333;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.btn-miki-primary:hover {
+  background-color: #333;
+  color: #fff;
+}
