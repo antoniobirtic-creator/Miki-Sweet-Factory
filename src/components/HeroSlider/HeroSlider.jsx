@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'; // Dodaj EffectFade
 import 'swiper/css/effect-fade'; // Importiraj CSS za fade
 
-import heroData from "../data/heroData.json";
+import heroData from "../../data/heroData.json";
 import "./HeroSlider.css";
 import "swiper/css";
 import "swiper/css/navigation";

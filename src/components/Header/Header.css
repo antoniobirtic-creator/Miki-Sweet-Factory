@@ -1,0 +1,86 @@
+.miki-header {
+  padding: 1.5rem 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Stil kada korisnik skrola dolje */
+.miki-header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 0.8rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-bottom: none;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  color: #fff !important;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.miki-header.scrolled .logo {
+  color: #333 !important;
+}
+
+.logo span {
+  font-size: 0.75rem;
+  font-weight: 300;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-links .nav-link {
+  color: #fff !important;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 12px;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.miki-header.scrolled .nav-link {
+  color: #555 !important;
+}
+
+/* Underline efekt za aktivne linkove */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+  width: 100%;
+}
+
+.btn-kontakt {
+  border: 1px solid #fff;
+  padding: 8px 25px !important;
+  border-radius: 50px;
+  margin-left: 15px;
+}
+
+.miki-header.scrolled .btn-kontakt {
+  border-color: #333;
+  color: #333 !important;
+}
+
+.btn-kontakt:hover {
+  background: #fff;
+  color: #000 !important;
+}
+
+.miki-header.scrolled .btn-kontakt:hover {
+  background: #333;
+  color: #fff !important;
+}
