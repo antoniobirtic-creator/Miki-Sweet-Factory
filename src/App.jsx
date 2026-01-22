@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import HeroSlider from './components/HeroSlider/HeroSlider';
 import Torte from './pages/Torte';
+import Footer from './components/Footer/Footer';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/kontakt" element={<div style={{paddingTop: '100px'}}>Kontakt stranica u izradi...</div>} />
           </Routes>
         </main>
+        <Footer />
       </div>
     </Router>
   );

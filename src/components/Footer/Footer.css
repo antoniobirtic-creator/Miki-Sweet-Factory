@@ -1,0 +1,94 @@
+.miki-footer-main {
+  background-color: #1a1e21;
+  overflow: hidden;
+}
+
+.brand-title {
+  color: #ff2d85;
+}
+
+.brand-title span {
+  color: #fff;
+}
+
+.footer-heading {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #007bff;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Dinamični Navigacijski Linkovi --- */
+.footer-links li {
+  margin-bottom: 12px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-links a:hover {
+  color: #ff2d85;
+  transform: translateX(8px); /* Lagani pomak udesno */
+}
+
+/* --- Dinamične Social Ikone --- */
+.social-icons-footer .social-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-right: 12px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Snappy back effect */
+  text-decoration: none;
+}
+
+.social-icons-footer .social-icon:hover {
+  background-color: #ff2d85;
+  border-color: #ff2d85;
+  color: #fff;
+  transform: translateY(-8px) rotate(360deg); /* Skok i rotacija */
+}
+
+/* --- Kontakt Sekcija --- */
+.contact-link {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  color: #007bff;
+}
+
+.icon-blue {
+  color: #007bff;
+}
+
+/* --- Gumb Naruči Odmah --- */
+.btn-order-now {
+  background-color: #007bff;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.btn-order-now:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+}
+
+.footer-bottom-text {
+  opacity: 0.6;
+  font-size: 0.85rem;
+}

@@ -1,0 +1,17 @@
+:root {
+  --font-primary: "Montserrat", sans-serif;
+  --font-heading: "Playfair Display", serif;
+}
+
+body {
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased; /* SNR trik za glađe fontove na Macu */
+}
+
+h1,
+h2,
+h3,
+.brand-title {
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+}
