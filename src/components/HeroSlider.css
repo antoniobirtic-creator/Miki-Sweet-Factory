@@ -1,45 +1,84 @@
-/* HeroSlider.css */
 .hero-section {
-  background-color: #fcfcfc;
-  overflow: hidden;
-}
-
-.hero-slide-container {
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-}
-
-.hero-image {
-  max-height: 500px;
   width: 100%;
-  object-fit: cover;
-  border-radius: 15px;
-  transition: transform 0.5s ease;
+  height: 100vh; /* Cijeli ekran */
+}
+
+.hero-slide-item {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative; /* Potrebno za overlay */
+}
+
+
+.hero-section, .hero-slide-item {
+  height: 100vh; /* 100% visine ekrana */
+  min-height: 600px; /* Da na malim ekranima ne bude premalo */
+}
+
+/* Tamni sloj preko slike */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* 50% prozirna crna */
+  z-index: 1;
+}
+
+/* Osiguraj da je tekst iznad overlay-a */
+.hero-slide-item .container {
+  position: relative;
+  z-index: 2;
+  color: #ffffff; /* Bijeli tekst na tamnoj podlozi */
 }
 
 .hero-title {
-  font-family: 'Playfair Display', serif; /* Primjer luksuznog fonta */
+  font-family: 'Playfair Display', serif;
   font-weight: 700;
-  color: #333;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3); /* Lagana sjena za čitljivost */
 }
 
-.hero-text {
-  color: #666;
-  font-size: 1.1rem;
+.hero-text p {
+  font-size: 1.5rem;
+  font-weight: 300;
 }
 
-.btn-miki-primary {
-  background-color: transparent;
-  border: 2px solid #555;
+/* Gumbi za tamnu podlogu */
+.btn-miki-light {
+  background-color: #fff;
   color: #333;
-  padding: 10px 30px;
+  padding: 12px 35px;
+  border: none;
+  border-radius: 50px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  font-weight: 600;
   transition: 0.3s;
 }
 
-.btn-miki-primary:hover {
-  background-color: #333;
+.btn-miki-outline {
+  background-color: transparent;
   color: #fff;
+  padding: 12px 35px;
+  border: 2px solid #fff;
+  border-radius: 50px;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: 0.3s;
 }
+
+.btn-miki-light:hover {
+  background-color: #f1f1f1;
+  transform: translateY(-3px);
+}
+
+.swiper-slide-active .hero-title {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.swiper-slide-active .hero-text {
+  animation: fadeInUp 1s ease forwards;
+}
+

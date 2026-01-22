@@ -1,50 +1,55 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules'; // Dodaj EffectFade
+import 'swiper/css/effect-fade'; // Importiraj CSS za fade
 
-import heroData from '../data/heroData.json';
-import './HeroSlider.css';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import heroData from "../data/heroData.json";
+import "./HeroSlider.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const HeroSlider = () => {
   return (
     <section className="hero-section">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Navigation, Pagination, Autoplay,EffectFade]}
+        effect="fade" // Ovo mijenja način prijelaza
+        speed={2000} // Fade traje 2 sekunde
         slidesPerView={1}
         navigation
         pagination={{ clickable: true }}
-        autoplay={{ delay: 5000 }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
+        loop={true}
       >
-        {heroData.map(slide => (
+        {heroData.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="container hero-slide-container">
-              <div className="row align-items-center">
-                
-                <div className="col-md-6">
-                  <img 
-                    src={slide.image} 
-                    alt={slide.title.rendered}
-                    className="hero-image shadow-lg"
-                  />
-                </div>
-
-                <div className="col-md-6 ps-md-5">
-                  <h1 className="hero-title display-4 mb-4">
-                    {slide.title.rendered}
-                  </h1>
-                  <div 
-                    className="hero-text mb-4"
-                    dangerouslySetInnerHTML={{ __html: slide.content.rendered }} 
-                  />
-                  <div className="d-flex gap-3">
-                    <button className="btn-miki-primary">Torte</button>
-                    <button className="btn-miki-primary">Kolači</button>
+            <div
+              className="hero-slide-item"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              <div className="hero-overlay"></div> {/* Tamni sloj */}
+              <div className="container h-100">
+                <div className="row h-100 align-items-center justify-content-center text-center">
+                  <div className="col-lg-8">
+                    <h1 className="hero-title display-2 mb-4">
+                      {slide.title.rendered}
+                    </h1>
+                    <div
+                      className="hero-text lead mb-5"
+                      dangerouslySetInnerHTML={{
+                        __html: slide.content.rendered,
+                      }}
+                    />
+                    <div className="d-flex gap-3 justify-content-center">
+                      <button className="btn-miki-light">Naša Ponuda</button>
+                      <button className="btn-miki-outline">Kontakt</button>
+                    </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </SwiperSlide>
