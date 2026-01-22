@@ -1,0 +1,40 @@
+.torte-page {
+  padding-top: 90px; /* Visina tvog navbara da sadržaj ne pobjegne ispod */
+}
+
+.torte-header {
+  background-color: #f8f9fa;
+  padding: 60px 0;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #eee;
+}
+
+.torte-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: #333;
+}
+
+.torte-page .miki-card.card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  background-color: #fff;
+  border-radius: 12px; /* Dodajmo malo profinjenosti */
+  overflow: hidden;
+}
+
+.torte-page .miki-card.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+
+.miki-card-img-placeholder {
+  height: 250px;
+  background-color: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #adb5bd;
+  font-weight: 600;
+}

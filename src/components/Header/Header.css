@@ -1,12 +1,13 @@
-.miki-header {
+/* Osnovna struktura */
+.miki-header.navbar {
   padding: 1.5rem 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Stil kada korisnik skrola dolje */
-.miki-header.scrolled {
+/* Scrolled stanje */
+.miki-header.navbar.scrolled {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   padding: 0.8rem 0;
@@ -14,15 +15,16 @@
   border-bottom: none;
 }
 
-.logo {
+/* LOGO - Povećavamo specifičnost da izbacimo !important */
+.miki-header .navbar-brand.logo {
   font-family: 'Playfair Display', serif;
-  color: #fff !important;
+  color: #fff;
   font-weight: 700;
   line-height: 1;
 }
 
-.miki-header.scrolled .logo {
-  color: #333 !important;
+.miki-header.scrolled .navbar-brand.logo {
+  color: #333;
 }
 
 .logo span {
@@ -33,54 +35,71 @@
   letter-spacing: 2px;
 }
 
-.nav-links .nav-link {
-  color: #fff !important;
+/* NAV LINKOVI - Ciljamo duboko u hijerarhiju */
+.miki-header .navbar-nav .nav-link {
+  color: #fff;
   text-transform: uppercase;
   font-size: 0.85rem;
   font-weight: 600;
+  padding: 0.5rem 0;
   margin: 0 12px;
   letter-spacing: 1px;
   position: relative;
+  transition: color 0.3s ease;
 }
 
-.miki-header.scrolled .nav-link {
-  color: #555 !important;
+.miki-header.scrolled .navbar-nav .nav-link {
+  color: #555;
 }
 
-/* Underline efekt za aktivne linkove */
-.nav-link::after {
+/* Hover i Active stanja */
+.miki-header .navbar-nav .nav-link:hover,
+.miki-header .navbar-nav .nav-link.active {
+  color: #fff; /* Ili boja po želji */
+}
+
+.miki-header.scrolled .navbar-nav .nav-link:hover,
+.miki-header.scrolled .navbar-nav .nav-link.active {
+  color: #000;
+}
+
+/* Underline efekt */
+.miki-header .navbar-nav .nav-link::after {
   content: '';
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: -5px;
+  bottom: 0;
   left: 0;
   background-color: currentColor;
   transition: width 0.3s ease;
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.miki-header .navbar-nav .nav-link:hover::after, 
+.miki-header .navbar-nav .nav-link.active::after {
   width: 100%;
 }
 
-.btn-kontakt {
+/* KONTAKT GUMB - Specifičnije ciljanje */
+.miki-header .nav-link.btn-kontakt {
   border: 1px solid #fff;
-  padding: 8px 25px !important;
+  padding: 8px 25px;
   border-radius: 50px;
   margin-left: 15px;
+  transition: all 0.3s ease;
 }
 
-.miki-header.scrolled .btn-kontakt {
+.miki-header.scrolled .nav-link.btn-kontakt {
   border-color: #333;
-  color: #333 !important;
+  color: #333;
 }
 
-.btn-kontakt:hover {
+.miki-header .nav-link.btn-kontakt:hover {
   background: #fff;
-  color: #000 !important;
+  color: #000;
 }
 
-.miki-header.scrolled .btn-kontakt:hover {
+.miki-header.scrolled .nav-link.btn-kontakt:hover {
   background: #333;
-  color: #fff !important;
+  color: #fff;
 }
