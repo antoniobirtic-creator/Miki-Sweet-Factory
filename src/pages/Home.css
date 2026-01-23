@@ -1,0 +1,51 @@
+/* SNR PRISTUP: Definiramo lokalne varijable unutar wrappera. 
+   Ako WP blokovi koriste te varijable, oni će ih automatski naslijediti.
+*/
+.wp-dynamic-content {
+  --wp--preset--color--primary: var(--miki-pink);
+  --wp--preset--color--secondary: var(--miki-blue);
+  
+  font-family: var(--font-body);
+  color: var(--miki-dark);
+  line-height: 1.8;
+}
+
+/* Slike i Figure kontrola */
+.wp-dynamic-content figure {
+  margin: 3rem 0;
+  padding: 0;
+}
+
+.wp-dynamic-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  /* Koristimo blaži shadow za profinjeniji izgled */
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* Gumbi - Povećavamo specifičnost selektorom umjesto !important */
+.wp-dynamic-content .wp-block-buttons .wp-block-button__link,
+.wp-dynamic-content .wp-block-button .wp-block-button__link {
+  background-color: var(--miki-pink);
+  color: #ffffff;
+  padding: 0.8rem 2.2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+  border: 2px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover efekt */
+.wp-dynamic-content .wp-block-button__link:hover {
+  background-color: var(--miki-blue);
+  color: #ffffff;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 180, 255, 0.2);
+}
+
+/* Sredimo i
