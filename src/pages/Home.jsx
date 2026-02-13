@@ -1,38 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import HeroSlider from "../components/HeroSlider/HeroSlider";
+import Features from "../components/Features/Features";
+import "./Home.css";
 
 const Home = () => {
-  const [page, setPage] = useState(null);
-
-  useEffect(() => {
-    // Vučemo stranicu 612
-    fetch(
-      "https://front2.edukacija.online/backend/wp-json/wp/v2/pages/612?_embed",
-    )
-      .then((res) => res.json())
-      .then((data) => setPage(data));
-  }, []);
-
   return (
     <div className="home-page">
+      {/* 1. Hero sekcija sa sliderom */}
       <HeroSlider />
 
-      {page && (
-        <article className="wp-content-wrapper py-5">
-          <div className="container">
-            {/* Naslov stranice iz WP-a */}
-            <h2 className="brand-heading mb-5 text-center">
-              {page.title.rendered}
-            </h2>
+      {/* 2. Sekcija s prednostima (Feature section) */}
+      <Features />
 
-            {/* Ovdje "curi" sav tvoj sadržaj iz WP-a */}
-            <div
-              className="wp-dynamic-content"
-              dangerouslySetInnerHTML={{ __html: page.content.rendered }}
-            />
-          </div>
-        </article>
-      )}
+      {/* Ovdje kasnije možemo dodati nove komponente poput <ProductsGrid /> ili <Testimonials /> */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
-import { Link } from "react-router-dom"; // SNR koristi Link umjesto buttona za internu navigaciju
+import { Link } from "react-router-dom"; // Link umjesto buttona za internu navigaciju
 
 // Swiper stilovi
 import "swiper/css";

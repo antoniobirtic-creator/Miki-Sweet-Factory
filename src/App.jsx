@@ -1,35 +1,33 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
-import HeroSlider from "./components/HeroSlider/HeroSlider";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home"; // Uvozimo Home stranicu
 import Torte from "./pages/Torte";
 import Kontakt from "./pages/Kontakt";
-import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
     <Router>
       <div className="app-wrapper">
         <Header />
+
         <main>
           <Routes>
-            {/* Početna ruta gdje je tvoj Slider */}
-            <Route path="/" element={<HeroSlider />} />
+            <Route path="/" element={<Home />} />
 
-            {/* Privremene rute da ne bude errora dok ne napraviš stranice */}
             <Route path="/torte" element={<Torte />} />
+            <Route path="/kontakt" element={<Kontakt />} />
 
             <Route
               path="/kolaci"
               element={
-                <div style={{ paddingTop: "100px" }}>
-                  Stranica s kolačima u izradi...
-                </div>
+                <div className="container py-5 mt-5">Stranica u izradi...</div>
               }
             />
-            <Route path="/kontakt" element={<Kontakt />} />
           </Routes>
         </main>
+
         <Footer />
       </div>
     </Router>
