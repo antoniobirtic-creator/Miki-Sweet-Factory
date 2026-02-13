@@ -1,105 +1,207 @@
-/* Osnovna struktura */
-.miki-header.navbar {
+/* --- BEM: Header Block --- */
+.header {
+  --pink: #ff2d85;
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Osnovna navigacija */
+.header__nav {
   padding: 1.5rem 0;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: transparent;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+  background-color: transparent;
+  border-bottom: none; /* Maknuta linija */
+  z-index: 1050;
 }
 
-/* Scrolled stanje */
-.miki-header.navbar.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 0.8rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  border-bottom: none;
+/* Skrolano stanje - povećana specifičnost umjesto !important */
+header .header__nav.header__nav--scrolled {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  padding: 0.7rem 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-/* LOGO - Povećavamo specifičnost da izbacimo !important */
-.miki-header .navbar-brand.logo {
-  font-family: 'Playfair Display', serif;
-  color: #fff;
-  font-weight: 700;
-  line-height: 1;
+/* Logo i Branding */
+.header__brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
 }
 
-.miki-header.scrolled .navbar-brand.logo {
+.header__logo {
+  height: 110px;
+  transition: var(--transition-smooth);
+  transform-origin: left top;
+  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+.header__nav--scrolled .header__logo {
+  height: 55px;
+  filter: none;
+}
+
+.header__miki-name {
+  font-family: "Playfair Display", serif;
+  color: var(--pink);
+  font-weight: 900;
+  font-size: 1.8rem;
+  display: block;
+}
+
+.header__brand-sub {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #000000;
+}
+
+.header__nav--scrolled .header__brand-sub {
   color: #333;
 }
 
-.logo span {
+/* Linkovi */
+header .header__link.nav-link {
+  color: #fff !important; /* Bootstrap specifičnost je ovdje prejaka, jedan !important ostaje za boju teksta */
+  font-weight: 700;
   font-size: 0.75rem;
-  font-weight: 300;
+  text-transform: uppercase;
+  margin: 0 8px;
+  transition: var(--transition-smooth);
+}
+
+header .header__nav--scrolled .header__link.nav-link {
+  color: #333 !important;
+}
+
+.header__link:hover {
+  color: var(--pink) !important;
+}
+
+/* Dropdown Menu */
+.header__dropdown-menu {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  padding: 20px;
+  visibility: hidden;
+  opacity: 0;
   display: block;
+  transform: translateY(20px);
+  transition: var(--transition-smooth);
+}
+
+.header__dropdown-menu.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header__dropdown-header {
+  color: var(--pink);
+  font-size: 0.7rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  padding-left: 15px;
 }
 
-/* NAV LINKOVI - Ciljamo duboko u hijerarhiju */
-.miki-header .navbar-nav .nav-link {
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 0.5rem 0;
-  margin: 0 12px;
-  letter-spacing: 1px;
-  position: relative;
-  transition: color 0.3s ease;
+/* --- HOVER LOGIKA (SNR SPECIFICITY) --- */
+
+/* 1. Inicijalni hover (dok je navbar transparentan) */
+header .header__nav .navbar-nav .nav-item .header__link:hover {
+  color: var(
+    --pink
+  ) !important; /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
+  transform: translateY(-2px);
 }
 
-.miki-header.scrolled .navbar-nav .nav-link {
-  color: #555;
+/* 2. Hover kada je navbar skrolan (tamna slova idu u roza) */
+header .header__nav--scrolled .navbar-nav .nav-item .header__link:hover {
+  color: var(--pink) !important;
 }
 
-/* Hover i Active stanja */
-.miki-header .navbar-nav .nav-link:hover,
-.miki-header .navbar-nav .nav-link.active {
-  color: #fff; /* Ili boja po želji */
-}
-
-.miki-header.scrolled .navbar-nav .nav-link:hover,
-.miki-header.scrolled .navbar-nav .nav-link.active {
-  color: #000;
-}
-
-/* Underline efekt */
-.miki-header .navbar-nav .nav-link::after {
-  content: '';
+/* 3. Underline efekt u roza boji na hover */
+header .header__link::after {
+  content: "";
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: currentColor;
-  transition: width 0.3s ease;
+  bottom: 5px;
+  left: 50%;
+  background-color: var(--pink);
+  transition: var(--transition-smooth);
+  transform: translateX(-50%);
 }
 
-.miki-header .navbar-nav .nav-link:hover::after, 
-.miki-header .navbar-nav .nav-link.active::after {
-  width: 100%;
+header .header__link:hover::after {
+  width: 80%;
 }
 
-/* KONTAKT GUMB - Specifičnije ciljanje */
-.miki-header .nav-link.btn-kontakt {
-  border: 1px solid #fff;
-  padding: 8px 25px;
+/* 4. Poseban hover za ikone unutar linkova */
+header .header__link:hover .header__icon {
+  color: var(--pink);
+  transform: scale(1.2);
+  transition: var(--transition-smooth);
+}
+/* --- HOVER LOGIKA (SNR SPECIFICITY) --- */
+
+/* 1. Inicijalni hover (dok je navbar transparentan) */
+header .header__nav .navbar-nav .nav-item .header__link:hover {
+  color: var(
+    --pink
+  ) !important; /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
+  transform: translateY(-2px);
+}
+
+/* 2. Hover kada je navbar skrolan (tamna slova idu u roza) */
+header .header__nav--scrolled .navbar-nav .nav-item .header__link:hover {
+  color: var(--pink) !important;
+}
+
+/* 3. Underline efekt u roza boji na hover */
+header .header__link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 5px;
+  left: 50%;
+  background-color: var(--pink);
+  transition: var(--transition-smooth);
+  transform: translateX(-50%);
+}
+
+header .header__link:hover::after {
+  width: 80%;
+}
+
+/* 4. Poseban hover za ikone unutar linkova */
+header .header__link:hover .header__icon {
+  color: var(--pink);
+  transform: scale(1.2);
+  transition: var(--transition-smooth);
+}
+
+/* Kontakt Button */
+header .header__link--button.nav-link {
+  border: 2px solid;
   border-radius: 50px;
-  margin-left: 15px;
-  transition: all 0.3s ease;
+  padding: 8px 20px !important;
 }
 
-.miki-header.scrolled .nav-link.btn-kontakt {
-  border-color: #333;
-  color: #333;
+header .header__nav--scrolled .header__link--button.nav-link {
+  background-color: var(#333);
+  color: #070707 !important;
 }
 
-.miki-header .nav-link.btn-kontakt:hover {
-  background: #fff;
-  color: #000;
+/* Strelica */
+.header__arrow {
+  font-size: 0.6rem;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
 }
 
-.miki-header.scrolled .nav-link.btn-kontakt:hover {
-  background: #333;
-  color: #fff;
+.header__arrow--rotate {
+  transform: rotate(180deg);
 }
