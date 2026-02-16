@@ -100,10 +100,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/torte?prigoda=rodendani"
-                    >
+                    <Link className="dropdown-item" to="/torte?prigoda=190">
                       Dječji rođendani
                     </Link>
                   </li>
