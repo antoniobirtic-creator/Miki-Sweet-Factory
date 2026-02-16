@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import HeroSlider from "../components/HeroSlider/HeroSlider";
 import Features from "../components/Features/Features";
-import "./Home.css";
 
 const Home = () => {
+  const [acfData, setAcfData] = useState(null);
+
+  useEffect(() => {
+    fetch(
+      "https://front2.edukacija.online/backend/wp-json/wp/v2/pages/612?_embed",
+    )
+      .then((res) => res.json())
+      .then(async (data) => {
+        if (data && data.acf) {
+          let updatedAcf = { ...data.acf };
+
+          if (typeof updatedAcf.features_image === "number") {
+            try {
+              const mediaRes = await fetch(
+                `https://front2.edukacija.online/backend/wp-json/wp/v2/media/${updatedAcf.features_image}`,
+              );
+              const mediaData = await mediaRes.json();
+              updatedAcf.features_image = mediaData.source_url;
+            } catch (err) {
+              console.error("Greška pri dohvaćanju slike:", err);
+            }
+          }
+
+          setAcfData(updatedAcf);
+        }
+      })
+      .catch((err) => console.error("WP Fetch error:", err));
+  }, []);
+
   return (
     <div className="home-page">
-      {/* 1. Hero sekcija sa sliderom */}
       <HeroSlider />
-
-      {/* 2. Sekcija s prednostima (Feature section) */}
-      <Features />
-
-      {/* Ovdje kasnije možemo dodati nove komponente poput <ProductsGrid /> ili <Testimonials /> */}
+      <Features data={acfData} />
     </div>
   );
 };
