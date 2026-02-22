@@ -8,7 +8,14 @@ const fetchFromApi = async (endpoint) => {
 
 export const api = {
   getCollection: (name) => fetchFromApi(`${name}?_embed&per_page=100`),
-  getPosts: (params) => fetchFromApi(`posts?_embed&${params}`),
+  getPosts: (params) => fetchFromApi(`posts?_embed&${params}`), // Ovo ostaje za HeroSlider
   getSingle: (name, id) => fetchFromApi(`${name}/${id}?_embed`),
   getMedia: (id) => fetchFromApi(`media/${id}`),
+
+  // SNR DODATAK: Za Torte (CPT) i bilo koji drugi budući tip
+  getCustomType: (type, params = "") => {
+    // Ako params već ima ?, koristi &, inače ?
+    const separator = params.startsWith("?") ? "&" : "?";
+    return fetchFromApi(`${type}${params}${separator}_embed`);
+  },
 };

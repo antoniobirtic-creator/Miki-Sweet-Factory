@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import HeroSlider from "../components/HeroSlider/HeroSlider";
 import Features from "../components/Features/Features";
+import FeaturedTorte from "../components/FeaturedTorte/FeaturedTorte";
 import { api } from "../services/api";
 
 const Home = () => {
@@ -40,6 +41,7 @@ const Home = () => {
     <div className="home-page">
       <HeroSlider />
       <Features data={acfData} />
+      <FeaturedTorte />
     </div>
   );
 };
