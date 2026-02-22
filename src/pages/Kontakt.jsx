@@ -9,6 +9,7 @@ import {
   FaClock,
   FaTruck,
 } from "react-icons/fa";
+import { api } from "../services/api";
 import "./Kontakt.css";
 
 const Kontakt = () => {
@@ -16,27 +17,20 @@ const Kontakt = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const controller = new AbortController();
-
-    fetch("https://front2.edukacija.online/backend/wp-json/wp/v2/pages/1184", {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // Provjeravamo ima li ACF podataka
+    const loadContactData = async () => {
+      try {
+        const data = await api.getSingle("pages", 1184);
         if (data && data.acf) {
           setInfo(data.acf);
         }
+      } catch (err) {
+        console.error("API Error u Kontakt.jsx:", err);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        if (err.name !== "AbortError") {
-          console.error("API Error:", err);
-          setLoading(false);
-        }
-      });
+      }
+    };
 
-    return () => controller.abort(); // Cleanup kod unmountanja komponente
+    loadContactData();
   }, []);
 
   if (loading) return <div className="loader-container">Slatkiši stižu...</div>;

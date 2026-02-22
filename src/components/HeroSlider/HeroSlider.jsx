@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
-import { Link } from "react-router-dom"; //
+import { Link } from "react-router-dom";
+import { api } from "../../services/api";
 
 // Swiper stilovi
 import "swiper/css";
@@ -14,14 +15,10 @@ const HeroSlider = () => {
   const [heroData, setHeroData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // URL držimo u varijabli radi lakšeg održavanja
-  const API_URL = `https://front2.edukacija.online/backend/wp-json/wp/v2/posts?categories=59&_embed`;
-
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchHeroData = async () => {
       try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
+        const data = await api.getPosts("categories=59");
         setHeroData(data);
       } catch (error) {
         console.error("Hero API Error:", error);
@@ -29,7 +26,7 @@ const HeroSlider = () => {
         setLoading(false);
       }
     };
-    fetchData();
+    fetchHeroData();
   }, []);
 
   if (loading) return <div className="hero-placeholder" />;
@@ -43,14 +40,13 @@ const HeroSlider = () => {
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 6000, disableOnInteraction: false }}
-        loop={heroData.length > 1} // Loop samo ako ima više od 1 slidea
+        loop={heroData.length > 1}
       >
         {heroData.map((slide) => {
-          // Sigurno izvlačenje slike
           const wpImage =
             slide._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
-            "fallback-image.jpg";
-          const acf = slide.acf; // ACF polja
+            "/placeholder.jpg";
+          const acf = slide.acf;
 
           return (
             <SwiperSlide key={slide.id}>
@@ -63,7 +59,6 @@ const HeroSlider = () => {
                 <div className="container h-100">
                   <div className="row h-100 align-items-center justify-content-center text-center">
                     <div className="col-lg-9">
-                      {/* Koristimo ACF za podnaslov ako postoji, inače fallback */}
                       <span className="hero-category text-uppercase mb-3 d-block">
                         {acf?.podnaslov || "Ručno rađene slastice"}
                       </span>
@@ -77,7 +72,7 @@ const HeroSlider = () => {
 
                       <div className="hero-text-wrapper mb-5">
                         <p className="lead">
-                          {slide.acf?.kratki_opis ||
+                          {acf?.kratki_opis ||
                             "Otkrijte čaroliju okusa u svakom zalogaju."}
                         </p>
                       </div>

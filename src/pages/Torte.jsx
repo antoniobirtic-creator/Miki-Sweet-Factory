@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
-import Lightbox from "yet-another-react-lightbox"; // Dodano
-import "yet-another-react-lightbox/styles.css"; // Dodano
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import { api } from "../services/api";
 import "./Torte.css";
 
 const Torte = () => {
@@ -11,7 +12,6 @@ const Torte = () => {
   const [vrste, setVrste] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Lightbox State
   const [open, setOpen] = useState(false);
   const [slides, setSlides] = useState([]);
 
@@ -20,30 +20,24 @@ const Torte = () => {
   const aktivnaVrsta = searchParams.get("vrsta") || "sve";
 
   useEffect(() => {
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        const [torteRes, prigodeRes, vrsteRes] = await Promise.all([
-          fetch(
-            "https://front2.edukacija.online/backend/wp-json/wp/v2/torte?_embed&per_page=100",
-          ),
-          fetch(
-            "https://front2.edukacija.online/backend/wp-json/wp/v2/prigode",
-          ),
-          fetch("https://front2.edukacija.online/backend/wp-json/wp/v2/vrste"),
+        const [torteData, prigodeData, vrsteData] = await Promise.all([
+          api.getCollection("torte"),
+          api.getCollection("prigode"),
+          api.getCollection("vrste"),
         ]);
-        const torteData = await torteRes.json();
-        const prigodeData = await prigodeRes.json();
-        const vrsteData = await vrsteRes.json();
 
         setTorte(torteData);
         setPrigode(prigodeData);
         setVrste(vrsteData);
-        setLoading(false);
       } catch (err) {
-        console.error("Greška:", err);
+        console.error("Greška pri dohvaćanju podataka:", err);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchData();
+    getData();
   }, []);
 
   useEffect(() => {
@@ -62,23 +56,25 @@ const Torte = () => {
     setSearchParams(newParams);
   };
 
-  // Funkcija za pripremu slika i otvaranje Lightboxa
   const openGallery = (torta) => {
     const mainImg = torta._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-    const galleryImgs = torta.acf.galerija_torti || [];
+    const rawGallery = torta.acf?.photo_gallery?.galerija_torti || [];
+    const galleryImgs = Array.isArray(rawGallery) ? rawGallery.flat() : [];
 
-    // Spajamo glavnu sliku s ostalima iz galerije
     const allSlides = [];
     if (mainImg) allSlides.push({ src: mainImg });
 
-    galleryImgs.forEach((imgUrl) => {
-      // Provjera formata (URL ili Objekt) ovisno o ACF postavkama
-      const src = typeof imgUrl === "string" ? imgUrl : imgUrl.url;
-      if (src) allSlides.push({ src });
+    galleryImgs.forEach((img) => {
+      const src = img.full_image_url || img.url || img.source_url;
+      if (src && typeof src === "string" && src !== "") {
+        allSlides.push({ src: src });
+      }
     });
 
-    setSlides(allSlides);
-    setOpen(true);
+    if (allSlides.length > 0) {
+      setSlides(allSlides);
+      setOpen(true);
+    }
   };
 
   if (loading) return <div className="loader">Učitavanje...</div>;
@@ -92,8 +88,21 @@ const Torte = () => {
         </header>
 
         <div className="filters-section">
+          {/* PO PRIGODI */}
           <div className="filter-row">
             <span className="filter-label">PO PRIGODI:</span>
+            <select
+              className="filter-select-mobile"
+              value={aktivnaPrigoda}
+              onChange={(e) => handleFilterChange("prigoda", e.target.value)}
+            >
+              <option value="sve">Sve prigode</option>
+              {prigode.map((p) => (
+                <option key={p.id} value={p.id.toString()}>
+                  {p.name}
+                </option>
+              ))}
+            </select>
             <div className="filter-pills">
               <button
                 className={aktivnaPrigoda === "sve" ? "pill active" : "pill"}
@@ -115,6 +124,7 @@ const Torte = () => {
             </div>
           </div>
 
+          {/* PO VRSTI */}
           <div className="filter-row">
             <span className="filter-label">PO VRSTI:</span>
             <div className="filter-pills secondary">
@@ -177,8 +187,6 @@ const Torte = () => {
           ))}
         </div>
       </div>
-
-      {/* Lightbox Komponenta */}
       <Lightbox open={open} close={() => setOpen(false)} slides={slides} />
     </div>
   );

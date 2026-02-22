@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from "react";
 import HeroSlider from "../components/HeroSlider/HeroSlider";
 import Features from "../components/Features/Features";
+import { api } from "../services/api";
 
 const Home = () => {
   const [acfData, setAcfData] = useState(null);
 
   useEffect(() => {
-    fetch(
-      "https://front2.edukacija.online/backend/wp-json/wp/v2/pages/612?_embed",
-    )
-      .then((res) => res.json())
-      .then(async (data) => {
+    const loadHomeData = async () => {
+      try {
+        const data = await api.getSingle("pages", 612);
+
         if (data && data.acf) {
           let updatedAcf = { ...data.acf };
 
           if (typeof updatedAcf.features_image === "number") {
             try {
-              const mediaRes = await fetch(
-                `https://front2.edukacija.online/backend/wp-json/wp/v2/media/${updatedAcf.features_image}`,
-              );
-              const mediaData = await mediaRes.json();
+              const mediaData = await api.getMedia(updatedAcf.features_image);
               updatedAcf.features_image = mediaData.source_url;
-            } catch (err) {
-              console.error("Greška pri dohvaćanju slike:", err);
+            } catch (mediaErr) {
+              console.error(
+                "Greška pri dohvaćanju slike u Home.jsx:",
+                mediaErr,
+              );
             }
           }
 
           setAcfData(updatedAcf);
         }
-      })
-      .catch((err) => console.error("WP Fetch error:", err));
+      } catch (err) {
+        console.error("WP Fetch error u Home.jsx:", err);
+      }
+    };
+
+    loadHomeData();
   }, []);
 
   return (
