@@ -45,18 +45,24 @@ const FeaturedTorte = () => {
         </div>
 
         <Swiper
-          modules={[Navigation, Pagination, Autoplay]}
+          modules={[Autoplay, Navigation]} // Isključi Pagination jer nema smisla kod stalnog skrolanja
           spaceBetween={30}
           slidesPerView={1}
-          navigation
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 5000 }}
+          loop={true} // Obavezno za beskonačni krug
+          speed={8000} // Brzina kojom jedan slajd prođe (u ms) - prilagodi po želji
+          autoplay={{
+            delay: 0, // Nema čekanja između slajdova
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true, // Ovo ostaje kako si tražio
+          }}
+          allowTouchMove={true} // Dozvoli korisniku da "povuče" traku
+          grabCursor={true}
           breakpoints={{
             640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
             1200: { slidesPerView: 4 },
           }}
-          className="torte-swiper"
+          className="torte-swiper-linear"
         >
           {torte.map((torta) => {
             const image =
@@ -73,7 +79,7 @@ const FeaturedTorte = () => {
                       alt={torta.title.rendered}
                       className="img-fluid"
                     />
-                    {/* SNR DETALJ: Badge za vrijeme izrade iz tvog ACF-a */}
+                    {/* Badge za vrijeme izrade iz ACF-a */}
                     {acf.vrijeme_izrade && (
                       <span className="vrijeme-badge">
                         {acf.vrijeme_izrade}
@@ -89,8 +95,8 @@ const FeaturedTorte = () => {
                       {acf.kratki_opis || "Domaća torta po narudžbi."}
                     </p>
                     <Link
-                      to={`/torta/${torta.id}`}
-                      className="btn-miki-outline btn-sm w-100"
+                      to={`/torta/${torta.slug}`}
+                      className="btn-miki-outline-1 btn-sm w-100"
                     >
                       Pogledaj detalje
                     </Link>

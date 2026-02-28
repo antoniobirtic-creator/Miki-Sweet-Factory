@@ -12,9 +12,8 @@ export const api = {
   getSingle: (name, id) => fetchFromApi(`${name}/${id}?_embed`),
   getMedia: (id) => fetchFromApi(`media/${id}`),
 
-  // SNR DODATAK: Za Torte (CPT) i bilo koji drugi budući tip
+  // Za Torte (CPT) i bilo koji drugi budući tip
   getCustomType: (type, params = "") => {
-    // Ako params već ima ?, koristi &, inače ?
     const separator = params.startsWith("?") ? "&" : "?";
     return fetchFromApi(`${type}${params}${separator}_embed`);
   },

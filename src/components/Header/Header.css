@@ -1,4 +1,4 @@
-/* --- BEM: Header Block --- */
+/* --- Header Block --- */
 .header {
   --pink: #ff2d85;
   --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -15,7 +15,7 @@
 
 /* Skrolano stanje - povećana specifičnost umjesto !important */
 header .header__nav.header__nav--scrolled {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(15px);
   padding: 0.7rem 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);

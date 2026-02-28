@@ -1,19 +1,65 @@
+/* --- Glavni kontejner sekcije --- */
+.featured-torte {
+  background-color: #fcfcfc;
+  padding: 40px 0;
+}
+
+/* --- Swiper specifične postavke --- */
+.torte-swiper-linear {
+  padding: 20px 0 60px 0 !important;
+}
+
+.torte-swiper-linear .swiper-wrapper {
+  /* Linearna tranzicija za neprekidni "marquee" efekt */
+  transition-timing-function: linear !important;
+}
+
+/* --- Kartica Torte --- */
 .torta-card {
   background: #fff;
   border-radius: 15px;
   overflow: hidden;
-  transition: transform 0.3s ease;
-  margin-bottom: 30px; /* Zbog sjene */
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); /* Glađa animacija */
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  height: 100%; /* SNR: Osigurava da kartica popuni visinu slide-a */
+  display: flex;
+  flex-direction: column; /* Slažemo sadržaj vertikalno */
 }
 
 .torta-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(214, 51, 132, 0.15); /* Blago roza sjena */
+  cursor: pointer;
 }
 
 .torta-image-wrapper {
   position: relative;
-  height: 250px;
-  overflow: hidden;
+  height: 280px; /* Malo više prostora za sliku */
+}
+
+.featured-torte h5 {
+  color: #333;
+  font-size: 1.25rem;
+  margin-top: 10px;
+}
+
+.btn-miki-outline-1 {
+  display: inline-block;
+  background-color: #ff2d85;
+  color: #fff;
+  padding: 15px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+.btn-miki-outline-1:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 45, 133, 0.3);
+  color: #fff;
 }
 
 .torta-image-wrapper img {
@@ -50,4 +96,9 @@
 .torte-swiper .swiper-button-prev:after {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.torte-swiper-linear .swiper-wrapper {
+  transition-timing-function: linear !important;
+  /* Ovo osigurava da nema "trzanja" između slajdova */
 }
