@@ -54,7 +54,7 @@ const Kontakt = () => {
                 </p>
               </header>
 
-              <address className="info-list" style={{ fontStyle: "normal" }}>
+              <address className="info-list">
                 {/* ADRESA */}
                 {info.adresa && (
                   <a
@@ -106,13 +106,13 @@ const Kontakt = () => {
                 )}
 
                 {/* RADNO VRIJEME */}
-                <div className="info-item mb-4">
+                <div className="info-item mb-4 clickable-item">
                   <div className="icon-box me-2">
                     <FaClock />
                   </div>
                   <div>
                     <h6>Radno vrijeme</h6>
-                    <p style={{ whiteSpace: "pre-line" }}>
+                    <p className="pre-line m-0">
                       {info.radno_vrijeme}
                     </p>
                   </div>
@@ -121,7 +121,7 @@ const Kontakt = () => {
                 {/* DOSTAVA */}
                 {info.info_dostave && (
                   <article className="delivery-card mt-4 p-3 rounded-3 d-flex align-items-center gap-3 bg-light">
-                    <FaTruck className="fs-3 text-danger" />
+                    <FaTruck className="fs-3 kamion-ikona" />
                     <p className="small mb-0">{info.info_dostave}</p>
                   </article>
                 )}

@@ -1,6 +1,7 @@
 /* --- OSNOVNI WRAPPER --- */
 .kontakt-page-wrapper {
   min-height: 100vh;
+  padding-top: 100px;
   background: linear-gradient(-45deg, #ffffff, #fdf2f4, #f8f9fa, #ffffff);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
@@ -38,7 +39,7 @@
 }
 
 .kontakt-page-wrapper .clickable-item:hover {
-  background: rgba(255, 71, 87, 0.05);
+  background: rgba(255, 45, 133, 0.05);
   transform: translateX(10px);
 }
 
@@ -46,7 +47,7 @@
   width: 48px;
   height: 48px;
   background: #fff;
-  color: #ff4757;
+  color: #ff2d85;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,8 +58,12 @@
   flex-shrink: 0;
 }
 
+.kontakt-page-wrapper .info-list {
+  font-style: normal;
+}
+
 .kontakt-page-wrapper .clickable-item:hover .icon-box {
-  background: #ff4757;
+  background: #ff2d85;
   color: #fff;
   transform: scale(1.1) rotate(8deg);
 }
@@ -136,8 +141,12 @@
 /* --- DOSTAVA KARTICA --- */
 .kontakt-page-wrapper .delivery-card {
   background: #f8f9fa;
-  border-left: 4px solid #ff4757;
+  border-left: 4px solid #ff2d85;
   color: #57606f;
+}
+
+.kontakt-page-wrapper .kamion-ikona {
+  color: #ff2d85;
 }
 
 /* Animacija za kamiončić */
