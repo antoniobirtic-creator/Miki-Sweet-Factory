@@ -1,0 +1,113 @@
+.torta-single-page .main-image-wrapper {
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.torta-single-page .main-cake-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.torta-single-page .main-image-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.torta-single-page .thumbnail-wrapper {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.torta-single-page .thumbnail-wrapper:hover {
+  border-color: #ff2d85;
+  transform: translateY(-2px);
+}
+
+.torta-single-page .thumbnail-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.torta-single-page .gallery-thumbnails::-webkit-scrollbar {
+  height: 6px;
+}
+
+.torta-single-page .gallery-thumbnails::-webkit-scrollbar-thumb {
+  background-color: #dee2e6;
+  border-radius: 4px;
+}
+
+.torta-single-page .brand-text {
+  color: #ff2d85;
+  letter-spacing: -0.5px;
+}
+
+.torta-single-page .price-tag {
+  color: #2b2b2b;
+}
+
+.torta-single-page .spec-icon {
+  color: #007bff;
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
+
+.torta-single-page .spec-item small {
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.torta-single-page .btn-order-single {
+  background-color: #ff2d85;
+  border-color: #ff2d85;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease;
+}
+
+.torta-single-page .btn-order-single:hover {
+  background-color: #e61a6d;
+  border-color: #e61a6d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 45, 133, 0.3) !important;
+}
+
+.torta-single-page .btn-back {
+  color: #6c757d;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.torta-single-page .btn-back:hover {
+  color: #ff2d85;
+}
+
+.torta-single-page .loader-container,
+.torta-single-page .error-container {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #6c757d;
+}
+
+@media (max-width: 991.98px) {
+  .torta-single-page .torta-info-card {
+    padding: 2rem !important;
+  }
+}

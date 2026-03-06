@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import ScrollToAnchor from "./components/ScrollToAnchor";
 import Home from "./pages/Home"; // Uvozimo Home stranicu
 import Torte from "./pages/Torte";
+import TortaSingle from "./pages/TortaSingle";
 import Kontakt from "./pages/Kontakt";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/torte" element={<Torte />} />
+            <Route path="/torte/:id" element={<TortaSingle />} />
             <Route path="/kontakt" element={<Kontakt />} />
 
             <Route

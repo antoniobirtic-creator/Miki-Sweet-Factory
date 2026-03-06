@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
-import Lightbox from "yet-another-react-lightbox";
-import "yet-another-react-lightbox/styles.css";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import "./Torte.css";
 
@@ -12,9 +10,7 @@ const Torte = () => {
   const [vrste, setVrste] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [open, setOpen] = useState(false);
-  const [slides, setSlides] = useState([]);
-
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const aktivnaPrigoda = searchParams.get("prigoda") || "sve";
   const aktivnaVrsta = searchParams.get("vrsta") || "sve";
@@ -56,26 +52,7 @@ const Torte = () => {
     setSearchParams(newParams);
   };
 
-  const openGallery = (torta) => {
-    const mainImg = torta._embedded?.["wp:featuredmedia"]?.[0]?.source_url;
-    const rawGallery = torta.acf?.photo_gallery?.galerija_torti || [];
-    const galleryImgs = Array.isArray(rawGallery) ? rawGallery.flat() : [];
 
-    const allSlides = [];
-    if (mainImg) allSlides.push({ src: mainImg });
-
-    galleryImgs.forEach((img) => {
-      const src = img.full_image_url || img.url || img.source_url;
-      if (src && typeof src === "string" && src !== "") {
-        allSlides.push({ src: src });
-      }
-    });
-
-    if (allSlides.length > 0) {
-      setSlides(allSlides);
-      setOpen(true);
-    }
-  };
 
   if (loading) return <div className="loader">Učitavanje...</div>;
 
@@ -154,7 +131,7 @@ const Torte = () => {
             <div
               key={torta.id}
               className="torta-item"
-              onClick={() => openGallery(torta)}
+              onClick={() => navigate(`/torte/${torta.id}`)}
               style={{ cursor: "pointer" }}
             >
               <div className="torta-img-box">
@@ -187,7 +164,6 @@ const Torte = () => {
           ))}
         </div>
       </div>
-      <Lightbox open={open} close={() => setOpen(false)} slides={slides} />
     </div>
   );
 };
