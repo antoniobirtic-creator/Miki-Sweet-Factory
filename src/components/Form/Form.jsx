@@ -89,10 +89,16 @@ const Form = () => {
     const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
     try {
-      await emailjs.sendForm(
+      await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
-        formRef.current,
+        {
+          user_name: data.name,
+          user_email: data.email,
+          user_phone: data.phone,
+          cake_type: data.cakeType,
+          message: data.message,
+        },
         PUBLIC_KEY
       );
       setResult("success");
@@ -126,7 +132,7 @@ const Form = () => {
   };
 
   return (
-    <div className="contact-form-wrapper">
+    <div className="contact-form-wrapper" id="slatki-upit">
       {/* Background Slider */}
       {bgImages.length > 0 && (
         <div className="contact-form-bg-slider">
@@ -243,20 +249,7 @@ const Form = () => {
               </select>
             </div>
 
-            {/* Slika - opcionalno (Imajte na umu da EmailJS ne podržava direktno slanje file attachmenta bez plaćene verzije na isti način) */}
-            <div className="col-12 form-group">
-              <label htmlFor="ref_image" className="form-label text-white small">
-                Imate li sliku primjera? (Opcionalno)
-              </label>
-              <input
-                type="file"
-                id="ref_image"
-                name="ref_image"
-                className="form-control glass-input file-input"
-                accept="image/jpeg, image/png, application/pdf"
-              />
-              <small className="text-white-50 mt-1 d-block" style={{ fontSize: '0.7rem' }}>Podržani formati: JPG, PNG, PDF</small>
-            </div>
+
 
             {/* Opis */}
             <div className="col-12 form-group text-area-group">

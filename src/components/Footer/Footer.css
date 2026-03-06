@@ -75,17 +75,21 @@
 
 /* --- Gumb Naruči Odmah --- */
 .btn-order-now {
-  background-color: #007bff;
+  background-color: #ff2d85;
   border: none;
   font-weight: 600;
-  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(255, 45, 133, 0.2);
   transition: all 0.3s ease;
 }
 
 .btn-order-now:hover {
-  background-color: #0056b3;
+  background-color: #e61a6d;
   transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+  box-shadow: 0 8px 20px rgba(255, 45, 133, 0.4);
+}
+
+.working-hours-wrapper p {
+  color: #cccccc !important;
 }
 
 .footer-bottom-text {

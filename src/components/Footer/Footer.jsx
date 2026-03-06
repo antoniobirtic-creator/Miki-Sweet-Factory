@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,10 +11,27 @@ import {
   faInstagram,
   faWhatsapp,
 } from "@fortawesome/free-brands-svg-icons";
+import { api } from "../../services/api";
 import "./Footer.css";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [info, setInfo] = useState(null);
+
+  useEffect(() => {
+    const loadContactData = async () => {
+      try {
+        const data = await api.getSingle("pages", 1184);
+        if (data && data.acf) {
+          setInfo(data.acf);
+        }
+      } catch (err) {
+        console.error("API Error u Footer.jsx:", err);
+      }
+    };
+
+    loadContactData();
+  }, []);
 
   return (
     <footer className="miki-footer-main bg-dark text-white pt-5 pb-3 mt-5">
@@ -31,7 +48,7 @@ const Footer = () => {
             </p>
             <div className="social-icons-footer">
               <a
-                href="https://facebook.com"
+                href={info?.facebook || "https://facebook.com"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -40,7 +57,7 @@ const Footer = () => {
                 <FontAwesomeIcon icon={faFacebookF} />
               </a>
               <a
-                href="https://instagram.com"
+                href={info?.instagram || "https://instagram.com"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -49,7 +66,7 @@ const Footer = () => {
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
               <a
-                href="https://wa.me/385958718497"
+                href={info?.whatsapp ? `https://wa.me/${String(info.whatsapp).replace(/\D/g, "")}` : "https://wa.me/385958718497"}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="social-icon"
@@ -100,21 +117,23 @@ const Footer = () => {
                   icon={faLocationDot}
                   className="icon-blue me-2"
                 />
-                <span className="contact-text">
-                  Biskupa J. Čolnića 1a, Đakovo
-                </span>
+                <Link to="/kontakt#mapa" className="contact-link" style={{ textDecoration: 'none' }}>
+                  <span className="contact-text">
+                    {info?.adresa || "Biskupa J. Čolnića 1a, Đakovo"}
+                  </span>
+                </Link>
               </li>
               <li className="mb-3">
                 <FontAwesomeIcon icon={faPhone} className="icon-blue me-2" />
-                <a href="tel:+385958718497" className="contact-link">
-                  +385 95 871 8497
+                <a href={`tel:${info?.telefon?.replace(/\s/g, "") || "+385958718497"}`} className="contact-link">
+                  {info?.telefon || "+385 95 871 8497"}
                 </a>
               </li>
               <li className="mb-3">
                 <FontAwesomeIcon icon={faEnvelope} className="icon-blue me-2" />
-                <a href="mailto:info@miki-sweet.hr" className="contact-link">
+                <a href={`mailto:${info?.email || "info@miki-sweet.hr"}`} className="contact-link">
                   {" "}
-                  info@miki-sweet.hr
+                  {info?.email || "info@miki-sweet.hr"}
                 </a>
               </li>
             </ul>
@@ -125,13 +144,14 @@ const Footer = () => {
           <div className="col-lg-3 col-md-6">
             <h5 className="fw-bold mb-4 footer-heading">Radno Vrijeme</h5>
             <div className="working-hours-wrapper">
-              <p className="mb-1">Pon - Pet: 08:00 - 18:00</p>
-              <p className="mb-1">Subota: 08:00 - 14:00</p>
-
-              <p className="mb-4 text-muted">Nedjelja: Zatvoreno</p>
+              <p className="mb-4 text-muted pre-line" style={{ whiteSpace: "pre-line" }}>
+                {info?.radno_vrijeme || "Pon - Pet: 08:00 - 18:00\nSubota: 08:00 - 14:00\nNedjelja: Zatvoreno"}
+              </p>
+              
               <Link
-                to="/kontakt"
-                className="btn btn-primary rounded-pill px-4 btn-order-now"
+                to="/kontakt#slatki-upit"
+                className="btn btn-primary rounded-pill px-4 btn-order-now text-white"
+                style={{ backgroundColor: "#ff2d85", borderColor: "#ff2d85" }}
               >
                 Naruči odmah
               </Link>

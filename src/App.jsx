@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import ScrollToAnchor from "./components/ScrollToAnchor";
 import Home from "./pages/Home"; // Uvozimo Home stranicu
 import Torte from "./pages/Torte";
 import Kontakt from "./pages/Kontakt";
@@ -9,6 +10,7 @@ import Kontakt from "./pages/Kontakt";
 function App() {
   return (
     <Router>
+      <ScrollToAnchor />
       <div className="app-wrapper">
         <Header />
 

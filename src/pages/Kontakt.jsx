@@ -170,7 +170,7 @@ const Kontakt = () => {
           </section>
 
           {/* MAPA */}
-          <section className="col-lg-7">
+          <section className="col-lg-7" id="mapa">
             <div
               className="map-container shadow-lg rounded-4 overflow-hidden h-100"
             >
