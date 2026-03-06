@@ -9,11 +9,11 @@
   padding: 1.5rem 0;
   transition: var(--transition-smooth);
   background-color: transparent;
-  border-bottom: none; /* Maknuta linija */
+  border-bottom: none;
+  /* Maknuta linija */
   z-index: 1050;
 }
 
-/* Skrolano stanje - povećana specifičnost umjesto !important */
 header .header__nav.header__nav--scrolled {
   background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(15px);
@@ -63,7 +63,7 @@ header .header__nav.header__nav--scrolled {
 
 /* Linkovi */
 header .header__link.nav-link {
-  color: #fff !important; /* Bootstrap specifičnost je ovdje prejaka, jedan !important ostaje za boju teksta */
+  color: #fff !important;
   font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -110,9 +110,8 @@ header .header__nav--scrolled .header__link.nav-link {
 
 /* 1. Inicijalni hover (dok je navbar transparentan) */
 header .header__nav .navbar-nav .nav-item .header__link:hover {
-  color: var(
-    --pink
-  ) !important; /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
+  color: var(--pink) !important;
+  /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
   transform: translateY(-2px);
 }
 
@@ -144,13 +143,13 @@ header .header__link:hover .header__icon {
   transform: scale(1.2);
   transition: var(--transition-smooth);
 }
-/* --- HOVER LOGIKA (SNR SPECIFICITY) --- */
+
+/* --- HOVER LOGIKA --- */
 
 /* 1. Inicijalni hover (dok je navbar transparentan) */
 header .header__nav .navbar-nav .nav-item .header__link:hover {
-  color: var(
-    --pink
-  ) !important; /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
+  color: var(--pink) !important;
+  /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
   transform: translateY(-2px);
 }
 
@@ -185,7 +184,6 @@ header .header__link:hover .header__icon {
 
 /* Kontakt Button */
 header .header__link--button.nav-link {
-  border: 2px solid;
   border-radius: 50px;
   padding: 8px 20px !important;
 }

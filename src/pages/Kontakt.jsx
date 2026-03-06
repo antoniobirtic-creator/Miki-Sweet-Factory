@@ -10,6 +10,7 @@ import {
   FaTruck,
 } from "react-icons/fa";
 import { api } from "../services/api";
+import Form from "../components/Form/Form";
 import "./Kontakt.css";
 
 const Kontakt = () => {
@@ -40,8 +41,8 @@ const Kontakt = () => {
     );
 
   return (
-    <main className="kontakt-page-wrapper">
-      <div className="container py-5">
+    <main className="kontakt-page-wrapper pt-5 mt-5">
+      <div className="container pb-5">
         <div className="row g-5 align-items-stretch">
           <section className="col-lg-5" aria-labelledby="contact-heading">
             <div className="content-card p-4 p-md-5 shadow-lg rounded-4 h-100">
@@ -172,7 +173,6 @@ const Kontakt = () => {
           <section className="col-lg-7">
             <div
               className="map-container shadow-lg rounded-4 overflow-hidden h-100"
-              style={{ minHeight: "500px" }}
             >
               {info.maps_url ? (
                 <iframe
@@ -194,6 +194,9 @@ const Kontakt = () => {
           </section>
         </div>
       </div>
+
+      {/* Slatki Upit Forma */}
+      <Form />
     </main>
   );
 };

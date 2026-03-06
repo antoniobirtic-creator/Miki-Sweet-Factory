@@ -1,21 +1,21 @@
 /* --- OSNOVNI WRAPPER --- */
 .kontakt-page-wrapper {
-  min-height: 100vh;
-  padding-top: 100px;
   background: linear-gradient(-45deg, #ffffff, #fdf2f4, #f8f9fa, #ffffff);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
 
 @keyframes gradientShift {
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -27,11 +27,11 @@
 }
 
 /* --- INFO ITEMS (Address, Phone, Email) --- */
-/* Koristimo specifičnost da maknemo underline bez !important */
 .kontakt-page-wrapper .clickable-item {
   text-decoration: none;
   display: flex;
-  align-items: center; /* Dodano za bolje poravnanje */
+  align-items: center;
+  /* Dodano za bolje poravnanje */
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   padding: 12px;
   border-radius: 15px;
@@ -124,10 +124,12 @@
   background: #1877f2;
   border-color: #1877f2;
 }
+
 .kontakt-page-wrapper .social-pill.ig:hover {
   background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%);
   border-color: transparent;
 }
+
 .kontakt-page-wrapper .social-pill.wa:hover {
   background: #25d366;
   border-color: #25d366;
@@ -154,9 +156,12 @@
   0% {
     transform: translateX(0);
   }
+
   50% {
     transform: translateX(8px);
-  } /* Suptilno pomicanje desno */
+  }
+
+  /* Suptilno pomicanje desno */
   100% {
     transform: translateX(0);
   }
@@ -165,7 +170,12 @@
 /* Primjena na ikonu unutar delivery kartice */
 .kontakt-page-wrapper .delivery-card svg {
   animation: truckDrive 2s ease-in-out infinite;
-  display: inline-block; /* Obavezno da bi transform radio */
+  display: inline-block;
+  /* Obavezno da bi transform radio */
+}
+
+.kontakt-page-wrapper .map-container {
+  min-height: 500px;
 }
 
 /* --- RESPONSIVE --- */

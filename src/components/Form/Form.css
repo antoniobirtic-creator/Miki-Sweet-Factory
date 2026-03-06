@@ -1,0 +1,158 @@
+.contact-form-wrapper {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: transparent; /* Prozirno kako bi se vidjela animacija pozadine i stopilo u mask-image */
+}
+
+/* --- POZADINSKI SLIDER --- */
+.contact-form-bg-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  /* Smooth blur efekt prelijevanja slika gori i doli */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+}
+
+.contact-form-bg-slider .bg-slide-item {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Poluproziran tamni overlay iznad slajdera da forma bude čitljiva */
+.contact-form-bg-slider .bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* --- GLASSMORPHISM FORMA --- */
+.contact-form-inner {
+  z-index: 3; /* Iznad pozadine i overlaya */
+  width: 100%;
+  max-width: 800px;
+  padding-top: 5rem !important; /* Dodali smo razmaka na vrhu */
+  padding-bottom: 5rem !important;
+}
+
+.glassmorphism-form {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.form-header .form-title {
+  letter-spacing: 0.5px;
+}
+
+/* --- INPUT POLJA --- */
+.glass-input {
+  background: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  color: #333 !important;
+  font-size: 0.95rem !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05) !important;
+  transition: all 0.3s ease !important;
+}
+
+.glass-input:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(255, 45, 133, 0.3) !important;
+}
+
+.glass-input::placeholder {
+  color: #a0a0a0 !important;
+}
+
+.form-label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* --- CUSTOM FILE INPUT PREMA SLICI --- */
+.file-input {
+  padding: 8px !important;
+  font-size: 0.85rem !important;
+}
+.file-input::file-selector-button {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 6px 12px;
+  margin-right: 12px;
+  color: #555;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.file-input::file-selector-button:hover {
+  background-color: #e2e2e2;
+}
+
+/* --- GUMBI --- */
+.btn-submit-form {
+  background-color: #ff2d85;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 35px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 45, 133, 0.4);
+}
+
+.btn-submit-form:hover {
+  background-color: #e61a6d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 45, 133, 0.5);
+}
+
+.btn-submit-form:disabled {
+  background-color: #ff85b3;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.whatsapp-btn {
+  background-color: #25d366;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+}
+.whatsapp-btn:hover {
+  background-color: #1ebe59;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .glassmorphism-form {
+    padding: 2rem;
+  }
+}
+@media (max-width: 576px) {
+  .glassmorphism-form {
+    padding: 1.5rem;
+  }
+}
