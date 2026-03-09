@@ -11,8 +11,8 @@
 
 .torta-single-page .main-cake-img {
   width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
+  max-height: 600px;
+  object-fit: contain;
 }
 
 .torta-single-page .main-image-wrapper:hover {

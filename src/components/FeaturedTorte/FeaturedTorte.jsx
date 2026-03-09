@@ -95,7 +95,7 @@ const FeaturedTorte = () => {
                       {acf.kratki_opis || "Domaća torta po narudžbi."}
                     </p>
                     <Link
-                      to={`/torta/${torta.slug}`}
+                      to={`/torte/${torta.slug}`}
                       className="btn-miki-outline-1 btn-sm w-100"
                     >
                       Pogledaj detalje

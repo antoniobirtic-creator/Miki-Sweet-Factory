@@ -131,7 +131,7 @@ const Torte = () => {
             <div
               key={torta.id}
               className="torta-item"
-              onClick={() => navigate(`/torte/${torta.id}`)}
+              onClick={() => navigate(`/torte/${torta.slug}`)}
               style={{ cursor: "pointer" }}
             >
               <div className="torta-img-box">

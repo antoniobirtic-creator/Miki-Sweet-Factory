@@ -15,7 +15,7 @@ export default function ScrollToAnchor() {
             block: "start",
           });
         }
-      }, 100); // Kratki timeout da se DOM stigne renderirati prije scrolla
+      }, 100); // Kratki timeout da se DOM stigne renderirati prije scrolla //
     }
   }, [hash]);
 
