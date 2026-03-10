@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import { api } from "../services/api";
+import SEO from "../components/Common/SEO";
 import { FaClock, FaTag, FaRulerCombined, FaChevronLeft, FaWhatsapp } from "react-icons/fa";
 import "./TortaSingle.css";
 
@@ -76,6 +77,12 @@ const TortaSingle = () => {
 
   return (
     <main className="torta-single-page pt-5 mt-5">
+      <SEO 
+        title={torta.title.rendered} 
+        description={torta.acf.kratki_opis}
+        image={slides[0]?.src}
+        url={`/torte/${slug}`}
+      />
       <div className="container pb-5">
         <Link to="/torte" className="btn-back mb-4 d-inline-flex align-items-center">
           <FaChevronLeft className="me-2" /> Povratak na torte

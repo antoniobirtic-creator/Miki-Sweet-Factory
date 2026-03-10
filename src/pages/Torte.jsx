@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { api } from "../services/api";
+import SEO from "../components/Common/SEO";
 import "./Torte.css";
 
 const Torte = () => {
@@ -58,6 +59,11 @@ const Torte = () => {
 
   return (
     <div className="torte-page">
+      <SEO 
+        title="Ponuda torti" 
+        description="Pogledajte našu bogatu ponudu torti za sve prigode. Svaka torta je unikatno remek-djelo."
+        url="/torte"
+      />
       <div className="container">
         <header className="torte-header">
           <h1>Naše Slatke Kreacije</h1>

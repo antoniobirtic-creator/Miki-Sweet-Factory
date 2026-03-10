@@ -7,10 +7,12 @@ import Home from "./pages/Home"; // Uvozimo Home stranicu
 import Torte from "./pages/Torte";
 import TortaSingle from "./pages/TortaSingle";
 import Kontakt from "./pages/Kontakt";
+import SEO from "./components/Common/SEO";
 
 function App() {
   return (
     <Router>
+      <SEO />
       <ScrollToAnchor />
       <div className="app-wrapper">
         <Header />

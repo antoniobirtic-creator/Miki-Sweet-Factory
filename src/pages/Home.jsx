@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import HeroSlider from "../components/HeroSlider/HeroSlider";
 import Features from "../components/Features/Features";
 import FeaturedTorte from "../components/FeaturedTorte/FeaturedTorte";
+import SEO from "../components/Common/SEO";
 import { api } from "../services/api";
 
 const Home = () => {
@@ -39,6 +40,10 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      <SEO 
+        title="Domaće torte i slastice" 
+        description="Miki Sweet Factory - najbolje torte u Đakovu rađene s ljubavlju."
+      />
       <HeroSlider />
       <Features data={acfData} />
       <FeaturedTorte />

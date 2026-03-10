@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { api } from "../services/api";
 import Form from "../components/Form/Form";
+import SEO from "../components/Common/SEO";
 import "./Kontakt.css";
 
 const Kontakt = () => {
@@ -42,6 +43,11 @@ const Kontakt = () => {
 
   return (
     <main className="kontakt-page-wrapper pt-5 mt-5">
+      <SEO 
+        title="Kontakt" 
+        description="Kontaktirajte Miki Sweet Factory. Tu smo za sva vaša pitanja i narudžbe najfinijih torti u Đakovu."
+        url="/kontakt"
+      />
       <div className="container pb-5">
         <div className="row g-5 align-items-stretch">
           <section className="col-lg-5" aria-labelledby="contact-heading">
