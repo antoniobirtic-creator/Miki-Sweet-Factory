@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import HeroSlider from "../components/HeroSlider/HeroSlider";
 import Features from "../components/Features/Features";
 import FeaturedTorte from "../components/FeaturedTorte/FeaturedTorte";
+import FaqSection from "../components/Sections/FaqSection";
 import SEO from "../components/Common/SEO";
 import { api } from "../services/api";
 
@@ -47,6 +48,7 @@ const Home = () => {
       <HeroSlider />
       <Features data={acfData} />
       <FeaturedTorte />
+      <FaqSection />
     </div>
   );
 };
