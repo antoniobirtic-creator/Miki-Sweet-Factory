@@ -3,6 +3,8 @@ import HeroSlider from "../components/HeroSlider/HeroSlider";
 import Features from "../components/Features/Features";
 import FeaturedTorte from "../components/FeaturedTorte/FeaturedTorte";
 import FaqSection from "../components/Sections/FaqSection";
+import ReviewsSection from "../components/Sections/ReviewsSection";
+import FeaturesInfo from "../components/FeatureInfo/FeaturesInfo";
 import SEO from "../components/Common/SEO";
 import { api } from "../services/api";
 
@@ -48,6 +50,8 @@ const Home = () => {
       <HeroSlider />
       <Features data={acfData} />
       <FeaturedTorte />
+      <FeaturesInfo />
+      <ReviewsSection />
       <FaqSection />
     </div>
   );
