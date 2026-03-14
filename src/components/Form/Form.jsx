@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
@@ -18,6 +19,7 @@ const Form = () => {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [bgImages, setBgImages] = useState([]);
+  const [agreed, setAgreed] = useState(false);
 
   // Dohvaćanje slika iz HeroSlider API-ja
   useEffect(() => {
@@ -63,6 +65,12 @@ const Form = () => {
     // 2. Osnovna validacija (Ime i poruka su uvijek obavezni)
     if (!name || !message) {
       alert("Molimo unesite vaše ime i narudžbu.");
+      return null;
+    }
+
+    // 2.1 Provjera slaganja s uvjetima
+    if (!agreed) {
+      alert("Molimo pročitajte i potvrdite slaganje s Politikom privatnosti.");
       return null;
     }
 
@@ -265,13 +273,31 @@ const Form = () => {
               />
             </div>
 
+            {/* Privacy Policy Checkbox */}
+            <div className="col-12 mt-3 d-flex align-items-center justify-content-center">
+              <div className="form-check text-start d-inline-block">
+                <input 
+                  type="checkbox" 
+                  className="form-check-input mt-1" 
+                  id="privacyCheck" 
+                  checked={agreed} 
+                  onChange={(e) => setAgreed(e.target.checked)} 
+                  required 
+                  style={{ cursor: "pointer" }}
+                />
+                <label className="form-check-label ms-2 text-white small" htmlFor="privacyCheck" style={{ cursor: "pointer" }}>
+                  Pročitao/la sam i slažem se s <Link to="/politika-privatnosti" target="_blank" style={{ color: "#ff2d85", textDecoration: "none" }}>Politikom privatnosti</Link>.
+                </label>
+              </div>
+            </div>
+
             {/* Submit Buttons */}
             <div className="col-12 form-actions mt-4 text-center d-flex justify-content-center gap-3">
               <button
                 type="button"
                 onClick={sendEmail}
                 className="btn-submit-form d-flex align-items-center gap-2"
-                disabled={loading}
+                disabled={loading || !agreed}
               >
                 <FaEnvelope /> {loading ? "Slanje..." : "Email narudžba"}
               </button>
@@ -281,6 +307,7 @@ const Form = () => {
                  onClick={handleWhatsApp}
                  className="btn-submit-form whatsapp-btn d-flex align-items-center gap-2 px-4"
                  title="Pošalji upit putem WhatsApp-a"
+                 disabled={!agreed}
               >
                  <FaWhatsapp /> WhatsApp
               </button>

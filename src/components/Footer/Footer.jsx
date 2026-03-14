@@ -165,7 +165,10 @@ const Footer = () => {
           <div className="col-md-6 text-center text-md-start">
             <p className="small mb-0">
               © {currentYear} <strong>Miki Sweet Factory</strong>. Sva prava
-              pridržana.
+              pridržana. <span className="mx-2">|</span>
+              <Link to="/politika-privatnosti" className="text-white-50 text-decoration-none">
+                Politika privatnosti
+              </Link>
             </p>
           </div>
           <div className="col-md-6 text-center text-md-end">

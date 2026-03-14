@@ -3,17 +3,18 @@ import { Link, useLocation } from "react-router-dom";
 import {
   FaBirthdayCake,
   FaCookie,
-  FaCalendarAlt,
   FaEnvelope,
   FaHome,
   FaChevronDown,
   FaUsers,
+  FaTimes,
 } from "react-icons/fa";
 import "./Header.css";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -24,17 +25,30 @@ const Header = () => {
 
   useEffect(() => {
     setShowDropdown(false);
+    setIsMenuOpen(false);
   }, [location]);
 
+  // Prevent scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMenuOpen]);
+
   const isHome = location.pathname === "/";
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header className="header">
       <nav
-        className={`header__nav navbar navbar-expand-xl fixed-top ${scrolled || !isHome ? "header__nav--scrolled" : ""}`}
+        className={`header__nav navbar navbar-expand-xl fixed-top ${scrolled || !isHome ? "header__nav--scrolled" : ""} ${isMenuOpen ? "header__nav--open" : ""}`}
       >
         <div className="container">
-          <Link className="header__brand" to="/">
+          <Link className="header__brand" to="/" onClick={closeMenu}>
             <img
               src="/images/logo-1.svg"
               alt="Miki Logo"
@@ -47,25 +61,26 @@ const Header = () => {
           </Link>
 
           <button
-            className="navbar-toggler"
+            className={`header__toggle ${isMenuOpen ? "header__toggle--active" : ""}`}
             type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
+            onClick={toggleMenu}
+            aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            {isMenuOpen ? (
+              <FaTimes className="header__toggle-icon header__toggle-icon--close" />
+            ) : (
+              <FaBirthdayCake className="header__toggle-icon header__toggle-icon--cake" />
+            )}
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarNav">
+          {/* Backdrop Overlay */}
+          {isMenuOpen && <div className="header__backdrop" onClick={closeMenu}></div>}
+
+          <div className={`collapse navbar-collapse ${isMenuOpen ? "show" : ""}`} id="navbarNav">
             <ul className="navbar-nav ms-auto align-items-center">
               <li className="nav-item">
                 <Link className="header__link nav-link" to="/">
                   <FaHome className="header__icon" /> Početna
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link className="header__link nav-link" to="/o-nama">
-                  <FaUsers className="header__icon" /> O nama
                 </Link>
               </li>
 
@@ -170,11 +185,13 @@ const Header = () => {
                   <FaCookie className="header__icon" /> Kolači
                 </Link>
               </li>
+
               <li className="nav-item">
-                <Link className="header__link nav-link" to="/blagdani">
-                  <FaCalendarAlt className="header__icon" /> Blagdani
+                <Link className="header__link nav-link" to="/o-nama">
+                  <FaUsers className="header__icon" /> O nama
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link
                   className="header__link header__link--button nav-link"

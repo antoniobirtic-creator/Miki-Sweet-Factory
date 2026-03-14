@@ -1,0 +1,53 @@
+.privacy-policy-page {
+  padding: 140px 0 80px;
+  background-color: #fdfdfd;
+}
+
+.privacy-policy-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.privacy-policy-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #ff2d85; /* Brand pink */
+}
+
+.privacy-policy-content {
+  background: #fff;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  line-height: 1.8;
+  color: #444;
+}
+
+.privacy-policy-content h2,
+.privacy-policy-content h3,
+.privacy-policy-content h4 {
+  color: #ff2d85;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+}
+
+.privacy-policy-content a {
+  color: #ff2d85;
+  text-decoration: none;
+}
+
+.privacy-policy-content a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .privacy-policy-content {
+    padding: 20px;
+  }
+  .privacy-policy-header h1 {
+    font-size: 2.2rem;
+  }
+}

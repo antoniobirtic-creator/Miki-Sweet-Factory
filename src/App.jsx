@@ -6,7 +6,10 @@ import ScrollToAnchor from "./components/ScrollToAnchor";
 import Home from "./pages/Home"; // Uvozimo Home stranicu
 import Torte from "./pages/Torte";
 import TortaSingle from "./pages/TortaSingle";
+import Kolaci from "./pages/Kolaci";
+import SingleKolac from "./pages/SingleKolac";
 import Kontakt from "./pages/Kontakt";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SEO from "./components/Common/SEO";
 
 function App() {
@@ -23,14 +26,10 @@ function App() {
 
             <Route path="/torte" element={<Torte />} />
             <Route path="/torte/:slug" element={<TortaSingle />} />
+            <Route path="/kolaci" element={<Kolaci />} />
+            <Route path="/kolaci/:slug" element={<SingleKolac />} />
             <Route path="/kontakt" element={<Kontakt />} />
-
-            <Route
-              path="/kolaci"
-              element={
-                <div className="container py-5 mt-5">Stranica u izradi...</div>
-              }
-            />
+            <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
           </Routes>
         </main>
 

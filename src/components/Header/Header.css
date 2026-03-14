@@ -2,6 +2,8 @@
 .header {
   --pink: #ff2d85;
   --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --glass-bg: rgba(255, 255, 255, 0.45);
+  --glass-blur: blur(15px);
 }
 
 /* Osnovna navigacija */
@@ -10,15 +12,28 @@
   transition: var(--transition-smooth);
   background-color: transparent;
   border-bottom: none;
-  /* Maknuta linija */
   z-index: 1050;
 }
 
 header .header__nav.header__nav--scrolled {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(15px);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
   padding: 0.7rem 0;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Nav Glass Effect */
+@media (max-width: 1199.98px) {
+  .header__nav {
+    background: var(--glass-bg) !important;
+    backdrop-filter: var(--glass-blur) !important;
+    padding: 1rem 0;
+  }
+}
+
+header .header__nav--open {
+  background: white !important;
+  backdrop-filter: none !important;
 }
 
 /* Logo i Branding */
@@ -27,6 +42,7 @@ header .header__nav.header__nav--scrolled {
   align-items: center;
   gap: 15px;
   text-decoration: none;
+  z-index: 1101;
 }
 
 .header__logo {
@@ -34,6 +50,13 @@ header .header__nav.header__nav--scrolled {
   transition: var(--transition-smooth);
   transform-origin: left top;
   filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+}
+
+@media (max-width: 1199.98px) {
+  .header__logo {
+    height: 65px;
+    filter: none;
+  }
 }
 
 .header__nav--scrolled .header__logo {
@@ -57,29 +80,60 @@ header .header__nav.header__nav--scrolled {
   color: #000000;
 }
 
-.header__nav--scrolled .header__brand-sub {
+/* Toggle Gumb */
+.header__toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 5px;
+  z-index: 1101;
+  transition: transform 0.3s ease;
+}
+
+.header__toggle-icon {
+  font-size: 2.2rem;
+  color: var(--pink);
+}
+
+.header__toggle-icon--close {
+  font-size: 1.8rem;
   color: #333;
 }
 
-/* Linkovi */
+@media (max-width: 1199.98px) {
+  .header__toggle {
+    display: block;
+  }
+}
+
+/* Backdrop */
+.header__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  z-index: 1099;
+}
+
+/* Base Link Styles (Desktop) */
 header .header__link.nav-link {
   color: #fff !important;
   font-weight: 700;
-  font-size: 0.75rem;
+  font-size: 0.9rem; /* Increased from 0.75rem */
   text-transform: uppercase;
   margin: 0 8px;
   transition: var(--transition-smooth);
+  position: relative;
 }
 
 header .header__nav--scrolled .header__link.nav-link {
   color: #333 !important;
 }
 
-.header__link:hover {
-  color: var(--pink) !important;
-}
-
-/* Dropdown Menu */
+/* Dropdown Menu (Desktop) */
 .header__dropdown-menu {
   border: none;
   border-radius: 15px;
@@ -87,7 +141,6 @@ header .header__nav--scrolled .header__link.nav-link {
   padding: 20px;
   visibility: hidden;
   opacity: 0;
-  display: block;
   transform: translateY(20px);
   transition: var(--transition-smooth);
 }
@@ -98,99 +151,131 @@ header .header__nav--scrolled .header__link.nav-link {
   transform: translateY(0);
 }
 
+/* Common Link States */
+header .header__link:hover {
+  color: var(--pink) !important;
+}
+
+header .header__link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0px;
+  left: 50%;
+  background-color: var(--pink);
+  transition: var(--transition-smooth);
+  transform: translateX(-50%);
+}
+
+header .header__link:hover::after {
+  width: 80%;
+}
+
+header .header__link:hover .header__icon {
+  color: var(--pink);
+  transform: scale(1.2);
+  transition: var(--transition-smooth);
+}
+
+/* Special Button (Kontakt) */
+header .header__link--button.nav-link {
+  border-radius: 50px;
+  padding: 8px 25px !important;
+  background-color: var(--pink);
+  color: white !important;
+  border-bottom: none !important;
+}
+
+header .header__link--button.nav-link:hover {
+  background-color: #e02575 !important;
+  color: white !important;
+  transform: translateY(-2px);
+}
+
+header .header__link--button.nav-link:hover .header__icon {
+  color: white !important;
+}
+
+header .header__link--button.nav-link::after {
+  display: none !important;
+}
+
+/* Mobile Sidebar & Global Mobile Overrides */
+@media (max-width: 1199.98px) {
+  .navbar-collapse {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.85); /* White glass */
+    backdrop-filter: var(--glass-blur);
+    padding: 100px 30px 40px;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1100;
+    display: block !important;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-collapse.show {
+    right: 0;
+  }
+
+  /* CRITICAL: Force dark links in mobile menu regardless of global scroll state */
+  header .header__link.nav-link {
+    color: #333 !important;
+    font-size: 1.1rem !important; /* Decreased from 1.2rem */
+    margin: 15px 0 !important;
+  }
+
+  .header__icon {
+    margin-right: 15px;
+    color: #333 !important;
+  }
+
+  header .header__link:hover {
+    color: var(--pink) !important;
+  }
+
+  /* Re-force white text for Kontakt button in mobile */
+  header .header__link--button.nav-link {
+    color: white !important;
+    margin-top: 20px !important;
+    width: 100%;
+    text-align: center;
+  }
+
+  header .header__link--button.nav-link .header__icon {
+    color: white !important;
+  }
+
+  header .header__link::after {
+    display: none;
+  }
+
+  .header__dropdown-menu {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    box-shadow: none;
+    padding: 10px 0 10px 40px;
+    display: none;
+    background: transparent;
+  }
+  
+  .header__dropdown-menu.show {
+    display: block;
+  }
+}
+
 .header__dropdown-header {
   color: var(--pink);
   font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
   padding-left: 15px;
-}
-
-/* --- HOVER LOGIKA (SNR SPECIFICITY) --- */
-
-/* 1. Inicijalni hover (dok je navbar transparentan) */
-header .header__nav .navbar-nav .nav-item .header__link:hover {
-  color: var(--pink) !important;
-  /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
-  transform: translateY(-2px);
-}
-
-/* 2. Hover kada je navbar skrolan (tamna slova idu u roza) */
-header .header__nav--scrolled .navbar-nav .nav-item .header__link:hover {
-  color: var(--pink) !important;
-}
-
-/* 3. Underline efekt u roza boji na hover */
-header .header__link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 5px;
-  left: 50%;
-  background-color: var(--pink);
-  transition: var(--transition-smooth);
-  transform: translateX(-50%);
-}
-
-header .header__link:hover::after {
-  width: 80%;
-}
-
-/* 4. Poseban hover za ikone unutar linkova */
-header .header__link:hover .header__icon {
-  color: var(--pink);
-  transform: scale(1.2);
-  transition: var(--transition-smooth);
-}
-
-/* --- HOVER LOGIKA --- */
-
-/* 1. Inicijalni hover (dok je navbar transparentan) */
-header .header__nav .navbar-nav .nav-item .header__link:hover {
-  color: var(--pink) !important;
-  /* !important ovdje ostavljamo jer Bootstrap koristi !important za .nav-link u nekim verzijama */
-  transform: translateY(-2px);
-}
-
-/* 2. Hover kada je navbar skrolan (tamna slova idu u roza) */
-header .header__nav--scrolled .navbar-nav .nav-item .header__link:hover {
-  color: var(--pink) !important;
-}
-
-/* 3. Underline efekt u roza boji na hover */
-header .header__link::after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 5px;
-  left: 50%;
-  background-color: var(--pink);
-  transition: var(--transition-smooth);
-  transform: translateX(-50%);
-}
-
-header .header__link:hover::after {
-  width: 80%;
-}
-
-/* 4. Poseban hover za ikone unutar linkova */
-header .header__link:hover .header__icon {
-  color: var(--pink);
-  transform: scale(1.2);
-  transition: var(--transition-smooth);
-}
-
-/* Kontakt Button */
-header .header__link--button.nav-link {
-  border-radius: 50px;
-  padding: 8px 20px !important;
-}
-
-header .header__nav--scrolled .header__link--button.nav-link {
-  background-color: var(#333);
-  color: #070707 !important;
 }
 
 /* Strelica */
@@ -202,4 +287,4 @@ header .header__nav--scrolled .header__link--button.nav-link {
 
 .header__arrow--rotate {
   transform: rotate(180deg);
-}
+}
