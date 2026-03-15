@@ -1,0 +1,108 @@
+.about-page {
+  background-color: #fcf9f9;
+  min-height: 100vh;
+}
+
+.about-hero {
+  height: 70vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+}
+
+.about-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.about-content h2,
+.about-content h3,
+.about-content h4 {
+  color: #333;
+  font-family: "Playfair Display", serif;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about-content p {
+  margin-bottom: 1.5rem;
+}
+
+.about-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* WP Block Gallery Support */
+.about-content .wp-block-gallery,
+.about-content .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 2.5rem 0;
+  list-style-type: none;
+}
+
+.about-content .wp-block-image,
+.about-content .gallery-item {
+  margin: 0;
+}
+
+.about-content .wp-block-image img,
+.about-content .gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  margin: 0;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.about-content .wp-block-image img:hover {
+  transform: scale(1.02);
+}
+
+/* CTA Section */
+.about-cta-section .cta-box {
+  background-color: #ffffff;
+  max-width: 800px;
+  border: 1px solid rgba(255, 45, 133, 0.1);
+}
+
+.brand-text {
+  color: #ff2d85;
+}
+
+.btn-about-cta {
+  background-color: #ff2d85;
+  border-color: #ff2d85;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-about-cta:hover {
+  background-color: #e62877;
+  border-color: #e62877;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(255, 45, 133, 0.2) !important;
+}

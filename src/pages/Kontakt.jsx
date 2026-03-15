@@ -35,7 +35,14 @@ const Kontakt = () => {
     loadContactData();
   }, []);
 
-  if (loading) return <div className="loader-container">Slatkiši stižu...</div>;
+  if (loading) 
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "50vh" }}>
+        <div className="spinner-border" style={{ color: "#ff2d85" }} role="status">
+          <span className="visually-hidden">Učitavanje...</span>
+        </div>
+      </div>
+    );
   if (!info)
     return (
       <div className="error-container">Podaci trenutno nisu dostupni.</div>

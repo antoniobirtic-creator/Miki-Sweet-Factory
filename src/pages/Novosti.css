@@ -1,0 +1,81 @@
+.novosti-page {
+  min-height: 80vh;
+  background-color: #fcf9f9;
+}
+
+.novosti-header h1 {
+  color: #ff2d85;
+  font-family: "Playfair Display", serif;
+  margin-top: 40px;
+}
+
+.novosti-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.novosti-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-img-wrapper {
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  border-bottom: 2px solid #ff2d85;
+}
+
+.novosti-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.novosti-card:hover .novosti-img {
+  transform: scale(1.05);
+}
+
+.extract-text {
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.card-title {
+  color: #333;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.novosti-btn {
+  background-color: transparent;
+  color: #ff2d85;
+  border: 2px solid #ff2d85;
+  border-radius: 30px;
+  padding: 8px 24px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+}
+
+.novosti-btn:hover {
+  background-color: #ff2d85;
+  color: white;
+}
+
+/* Loader style */
+.novosti-page .loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  font-size: 1.5rem;
+  color: #ff2d85;
+  font-family: "Playfair Display", serif;
+}

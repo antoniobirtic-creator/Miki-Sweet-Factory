@@ -5,7 +5,13 @@ import "./Features.css";
 
 const Features = ({ data }) => {
   if (!data || !data.features_list) {
-    return <div className="loader">Učitavanje sadržaja...</div>;
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "300px" }}>
+        <div className="spinner-border" style={{ color: "#ff2d85" }} role="status">
+          <span className="visually-hidden">Učitavanje...</span>
+        </div>
+      </div>
+    );
   }
 
   const {

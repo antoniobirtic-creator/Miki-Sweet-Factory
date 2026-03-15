@@ -20,7 +20,6 @@ const FeaturedTorte = () => {
         // Pozivamo novi endpoint "torte" (bez categories=60 jer CPT ne koristi taj query)
         const data = await api.getCustomType("torte", "?per_page=10");
 
-        console.log("Torte podaci:", data);
         setTorte(data);
       } catch (err) {
         console.error("Greška pri dohvaćanju torti:", err);
@@ -78,6 +77,7 @@ const FeaturedTorte = () => {
                       src={image}
                       alt={torta.title.rendered}
                       className="img-fluid"
+                      loading="lazy"
                     />
                     {/* Badge za vrijeme izrade iz ACF-a */}
                     {acf.vrijeme_izrade && (

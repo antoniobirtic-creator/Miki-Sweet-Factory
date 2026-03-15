@@ -1,0 +1,94 @@
+.single-novost-page {
+  background-color: #fcf9f9;
+  min-height: 100vh;
+}
+
+.novost-hero {
+  height: 60vh;
+  min-height: 400px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+.btn-back-light {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.btn-back-light:hover {
+  color: #ff2d85;
+  opacity: 0.9;
+}
+
+.hero-content {
+  z-index: 10;
+}
+
+.novost-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.novost-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.novost-content p {
+  margin-bottom: 1.5rem;
+}
+
+.novost-content a {
+  color: #ff2d85;
+  text-decoration: none;
+}
+
+.novost-content a:hover {
+  text-decoration: underline;
+}
+
+/* Gallery styles */
+.gallery-slide-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ff2d85 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ff2d85 !important;
+}
+
+.loader-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #ff2d85;
+  font-family: inherit;
+}

@@ -10,6 +10,7 @@ const Torte = () => {
   const [prigode, setPrigode] = useState([]);
   const [vrste, setVrste] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,6 +31,7 @@ const Torte = () => {
         setVrste(vrsteData);
       } catch (err) {
         console.error("Greška pri dohvaćanju podataka:", err);
+        setError("Došlo je do greške pri dohvaćanju torti. Molimo pokušajte ponovno kasnije.");
       } finally {
         setLoading(false);
       }
@@ -55,7 +57,22 @@ const Torte = () => {
 
 
 
-  if (loading) return <div className="loader">Učitavanje...</div>;
+  if (loading) 
+    return (
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "50vh" }}>
+        <div className="spinner-border" style={{ color: "#ff2d85" }} role="status">
+          <span className="visually-hidden">Učitavanje...</span>
+        </div>
+      </div>
+    );
+
+  if (error)
+    return (
+      <div className="d-flex justify-content-center align-items-center flex-column text-center p-5" style={{ minHeight: "50vh" }}>
+        <h3 className="mb-3 text-danger">Uspite, greška!</h3>
+        <p className="text-muted">{error}</p>
+      </div>
+    );
 
   return (
     <div className="torte-page">
@@ -146,7 +163,8 @@ const Torte = () => {
                     torta._embedded?.["wp:featuredmedia"]?.[0]?.source_url ||
                     "/placeholder.jpg"
                   }
-                  alt={torta.title.rendered}
+                  alt={torta._embedded?.["wp:featuredmedia"]?.[0]?.alt_text || torta.title.rendered || "Torta slika"}
+                  loading="lazy"
                 />
                 {torta.acf.vrijeme_izrade && (
                   <div className="torta-badge-time">

@@ -11,10 +11,15 @@ import SingleKolac from "./pages/SingleKolac";
 import Kontakt from "./pages/Kontakt";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SEO from "./components/Common/SEO";
+import Novosti from "./pages/Novosti";
+import SingleNovost from "./pages/SingleNovost";
+import ScrollToTop from "./components/ScrollToTop";
+import About from "./pages/About";
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <SEO />
       <ScrollToAnchor />
       <div className="app-wrapper">
@@ -28,6 +33,9 @@ function App() {
             <Route path="/torte/:slug" element={<TortaSingle />} />
             <Route path="/kolaci" element={<Kolaci />} />
             <Route path="/kolaci/:slug" element={<SingleKolac />} />
+            <Route path="/novosti" element={<Novosti />} />
+            <Route path="/novosti/:slug" element={<SingleNovost />} />
+            <Route path="/o-nama" element={<About />} />
             <Route path="/kontakt" element={<Kontakt />} />
             <Route path="/politika-privatnosti" element={<PrivacyPolicy />} />
           </Routes>

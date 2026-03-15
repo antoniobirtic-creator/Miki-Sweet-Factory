@@ -99,6 +99,16 @@ const Footer = () => {
                     </Link>
                   </li>
                   <li>
+                    <Link to="/novosti" aria-label="Pročitajte naše novosti">
+                      Novosti
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/o-nama" aria-label="Saznajte više o nama">
+                      O nama
+                    </Link>
+                  </li>
+                  <li>
                     <Link to="/kontakt" aria-label="Kontaktirajte nas">
                       Kontakt
                     </Link>

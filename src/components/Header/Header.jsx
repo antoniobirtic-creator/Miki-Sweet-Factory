@@ -8,6 +8,7 @@ import {
   FaChevronDown,
   FaUsers,
   FaTimes,
+  FaNewspaper,
 } from "react-icons/fa";
 import "./Header.css";
 
@@ -189,6 +190,12 @@ const Header = () => {
               <li className="nav-item">
                 <Link className="header__link nav-link" to="/o-nama">
                   <FaUsers className="header__icon" /> O nama
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link className="header__link nav-link" to="/novosti">
+                  <FaNewspaper className="header__icon" /> Novosti
                 </Link>
               </li>
 
