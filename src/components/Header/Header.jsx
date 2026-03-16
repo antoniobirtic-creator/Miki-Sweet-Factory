@@ -10,13 +10,37 @@ import {
   FaTimes,
   FaNewspaper,
 } from "react-icons/fa";
+import { api } from "../../services/api";
 import "./Header.css";
+import logo from "../../assets/images/logo-1.svg";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [prigode, setPrigode] = useState([]);
+  const [vrste, setVrste] = useState([]);
+  const [vrsteKolaca, setVrsteKolaca] = useState([]);
+  const [showKolaciDropdown, setShowKolaciDropdown] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const [prigodeData, vrsteData, kolaciVrsteData] = await Promise.all([
+          api.getCollection("prigode"),
+          api.getCollection("vrste"),
+          api.getCollection("vrsta_kolaca"),
+        ]);
+        setPrigode(prigodeData);
+        setVrste(vrsteData);
+        setVrsteKolaca(kolaciVrsteData);
+      } catch (err) {
+        console.error("Header categories fetch error:", err);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -51,7 +75,7 @@ const Header = () => {
         <div className="container">
           <Link className="header__brand" to="/" onClick={closeMenu}>
             <img
-              src="/images/logo-1.svg"
+              src={logo}
               alt="Miki Logo"
               className="header__logo"
             />
@@ -107,43 +131,16 @@ const Header = () => {
                   <li>
                     <span className="header__dropdown-header">Po Prigodi</span>
                   </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/torte?prigoda=vjencanja"
-                    >
-                      Vjenčanja
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/torte?prigoda=190">
-                      Dječji rođendani
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/torte?prigoda=krstenja"
-                    >
-                      Krštenja i Pričesti
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/torte?prigoda=godisnjice"
-                    >
-                      Godišnjice
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/torte?prigoda=korporativne"
-                    >
-                      Korporativne proslave
-                    </Link>
-                  </li>
+                  {prigode.map((p) => (
+                    <li key={p.id}>
+                      <Link
+                        className="dropdown-item"
+                        to={`/torte?prigoda=${p.slug}`}
+                      >
+                        {p.name}
+                      </Link>
+                    </li>
+                  ))}
 
                   <li>
                     <hr className="dropdown-divider" />
@@ -152,39 +149,51 @@ const Header = () => {
                   <li>
                     <span className="header__dropdown-header">Po Vrsti</span>
                   </li>
-                  <li>
-                    <Link className="dropdown-item" to="/torte?vrsta=cokoladne">
-                      Čokoladne (Premium)
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/torte?vrsta=vocne">
-                      Lagane Voćne
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/torte?vrsta=cheesecake"
-                    >
-                      Cheesecake varijacije
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className="dropdown-item"
-                      to="/torte?vrsta=bez-glutena"
-                    >
-                      Bez glutena / Vegan
-                    </Link>
-                  </li>
+                  {vrste.map((v) => (
+                    <li key={v.id}>
+                      <Link
+                        className="dropdown-item"
+                        to={`/torte?vrsta=${v.slug}`}
+                      >
+                        {v.name}
+                      </Link>
+                    </li>
+                  ))}
                 </ul>
               </li>
 
-              <li className="nav-item">
-                <Link className="header__link nav-link" to="/kolaci">
+              <li
+                className={`nav-item dropdown ${showKolaciDropdown ? "show" : ""}`}
+                onMouseEnter={() => setShowKolaciDropdown(true)}
+                onMouseLeave={() => setShowKolaciDropdown(false)}
+              >
+                <Link
+                  className="header__link header__link--dropdown nav-link"
+                  to="/kolaci"
+                >
                   <FaCookie className="header__icon" /> Kolači
+                  <FaChevronDown
+                    className={`header__arrow ${showKolaciDropdown ? "header__arrow--rotate" : ""}`}
+                  />
                 </Link>
+
+                <ul
+                  className={`header__dropdown-menu dropdown-menu ${showKolaciDropdown ? "show" : ""}`}
+                >
+                  <li>
+                    <span className="header__dropdown-header">Po Vrsti</span>
+                  </li>
+                  {vrsteKolaca.map((v) => (
+                    <li key={v.id}>
+                      <Link
+                        className="dropdown-item"
+                        to={`/kolaci?vrsta=${v.slug}`}
+                      >
+                        {v.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </li>
 
               <li className="nav-item">

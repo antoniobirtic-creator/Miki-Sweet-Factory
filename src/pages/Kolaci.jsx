@@ -37,10 +37,12 @@ const Kolaci = () => {
 
   useEffect(() => {
     let temp = [...kolaci];
-    if (aktivnaVrsta !== "sve")
-      temp = temp.filter((k) => k.vrsta_kolaca?.includes(parseInt(aktivnaVrsta)));
+    if (aktivnaVrsta !== "sve") {
+      const v = vrste.find(item => item.slug === aktivnaVrsta);
+      if (v) temp = temp.filter((k) => k.vrsta_kolaca?.includes(v.id));
+    }
     setFiltriraniKolaci(temp);
-  }, [aktivnaVrsta, kolaci]);
+  }, [aktivnaVrsta, kolaci, vrste]);
 
   const handleFilterChange = (key, value) => {
     const newParams = Object.fromEntries([...searchParams]);
@@ -90,7 +92,7 @@ const Kolaci = () => {
             >
               <option value="sve">Sve vrste</option>
               {vrste.map((v) => (
-                <option key={v.id} value={v.id.toString()}>
+                <option key={v.id} value={v.slug}>
                   {v.name}
                 </option>
               ))}
@@ -106,9 +108,9 @@ const Kolaci = () => {
                 <button
                   key={v.id}
                   className={
-                    aktivnaVrsta === v.id.toString() ? "pill active" : "pill"
+                    aktivnaVrsta === v.slug ? "pill active" : "pill"
                   }
-                  onClick={() => handleFilterChange("vrsta", v.id.toString())}
+                  onClick={() => handleFilterChange("vrsta", v.slug)}
                 >
                   {v.name}
                 </button>

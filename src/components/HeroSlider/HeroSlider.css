@@ -82,3 +82,32 @@
   animation: fadeInUp 1s ease forwards;
 }
 
+/* Mobitel prilagodbe */
+@media (max-width: 768px) {
+  .hero-slide-item .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 20%;
+  }
+
+  .hero-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 1rem !important;
+    min-height: 3.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-text-wrapper {
+    min-height: 4em;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-category {
+    margin-bottom: 0.5rem !important;
+  }
+}
+

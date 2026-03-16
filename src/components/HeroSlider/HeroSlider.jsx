@@ -37,7 +37,6 @@ const HeroSlider = () => {
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         effect="fade"
         speed={1500}
-        navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 6000, disableOnInteraction: false }}
         loop={heroData.length > 1}

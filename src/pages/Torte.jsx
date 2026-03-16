@@ -41,12 +41,16 @@ const Torte = () => {
 
   useEffect(() => {
     let temp = [...torte];
-    if (aktivnaPrigoda !== "sve")
-      temp = temp.filter((t) => t.prigode?.includes(parseInt(aktivnaPrigoda)));
-    if (aktivnaVrsta !== "sve")
-      temp = temp.filter((t) => t.vrste?.includes(parseInt(aktivnaVrsta)));
+    if (aktivnaPrigoda !== "sve") {
+      const p = prigode.find(item => item.slug === aktivnaPrigoda);
+      if (p) temp = temp.filter((t) => t.prigode?.includes(p.id));
+    }
+    if (aktivnaVrsta !== "sve") {
+      const v = vrste.find(item => item.slug === aktivnaVrsta);
+      if (v) temp = temp.filter((t) => t.vrste?.includes(v.id));
+    }
     setFiltriraneTorte(temp);
-  }, [aktivnaPrigoda, aktivnaVrsta, torte]);
+  }, [aktivnaPrigoda, aktivnaVrsta, torte, prigode, vrste]);
 
   const handleFilterChange = (key, value) => {
     const newParams = Object.fromEntries([...searchParams]);
@@ -98,7 +102,7 @@ const Torte = () => {
             >
               <option value="sve">Sve prigode</option>
               {prigode.map((p) => (
-                <option key={p.id} value={p.id.toString()}>
+                <option key={p.id} value={p.slug}>
                   {p.name}
                 </option>
               ))}
@@ -114,9 +118,9 @@ const Torte = () => {
                 <button
                   key={p.id}
                   className={
-                    aktivnaPrigoda === p.id.toString() ? "pill active" : "pill"
+                    aktivnaPrigoda === p.slug ? "pill active" : "pill"
                   }
-                  onClick={() => handleFilterChange("prigoda", p.id.toString())}
+                  onClick={() => handleFilterChange("prigoda", p.slug)}
                 >
                   {p.name}
                 </button>
@@ -134,7 +138,7 @@ const Torte = () => {
             >
               <option value="sve">Sve vrste</option>
               {vrste.map((v) => (
-                <option key={v.id} value={v.id.toString()}>
+                <option key={v.id} value={v.slug}>
                   {v.name}
                 </option>
               ))}
@@ -150,9 +154,9 @@ const Torte = () => {
                 <button
                   key={v.id}
                   className={
-                    aktivnaVrsta === v.id.toString() ? "pill active" : "pill"
+                    aktivnaVrsta === v.slug ? "pill active" : "pill"
                   }
-                  onClick={() => handleFilterChange("vrsta", v.id.toString())}
+                  onClick={() => handleFilterChange("vrsta", v.slug)}
                 >
                   {v.name}
                 </button>

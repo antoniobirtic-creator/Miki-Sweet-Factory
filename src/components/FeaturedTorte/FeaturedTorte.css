@@ -9,6 +9,39 @@
   padding: 20px 0 60px 0 !important;
 }
 
+.swiper-fade-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.swiper-fade-container::before,
+.swiper-fade-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.swiper-fade-container::before {
+  left: 0;
+  background: linear-gradient(to right, #fcfcfc, transparent);
+}
+
+.swiper-fade-container::after {
+  right: 0;
+  background: linear-gradient(to left, #fcfcfc, transparent);
+}
+
+@media (max-width: 768px) {
+  .swiper-fade-container::before,
+  .swiper-fade-container::after {
+    display: none;
+  }
+}
+
 .torte-swiper-linear .swiper-wrapper {
   /* Linearna tranzicija za neprekidni "marquee" efekt */
   transition-timing-function: linear !important;
