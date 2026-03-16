@@ -156,6 +156,22 @@
   font-weight: 600;
 }
 
+.btn-view-details {
+  background-color: #ff2d85;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.kolac-item:hover .btn-view-details {
+  background-color: #e61a6d;
+}
+
 /* Mobitel */
 @media (max-width: 600px) {
   .kolaci-gallery {

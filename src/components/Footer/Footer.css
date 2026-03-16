@@ -16,12 +16,12 @@
   display: inline-block;
   padding-bottom: 8px;
   border-bottom: 2px solid #007bff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 /* --- Dinamični Navigacijski Linkovi --- */
 .footer-links li {
-  margin-bottom: 12px;
+  margin-bottom: 2px;
 }
 
 .footer-links a {
@@ -33,7 +33,8 @@
 
 .footer-links a:hover {
   color: #ff2d85;
-  transform: translateX(8px); /* Lagani pomak udesno */
+  transform: translateX(8px);
+  /* Lagani pomak udesno */
 }
 
 /* --- Dinamične Social Ikone --- */
@@ -47,7 +48,8 @@
   justify-content: center;
   color: #fff;
   margin-right: 12px;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Snappy back effect */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Snappy back effect */
   text-decoration: none;
 }
 
@@ -55,7 +57,8 @@
   background-color: #ff2d85;
   border-color: #ff2d85;
   color: #fff;
-  transform: translateY(-8px) rotate(360deg); /* Skok i rotacija */
+  transform: translateY(-8px) rotate(360deg);
+  /* Skok i rotacija */
 }
 
 /* --- Kontakt Sekcija --- */

@@ -155,4 +155,8 @@
   .glassmorphism-form {
     padding: 1.5rem;
   }
+  .btn-submit-form {
+    padding: 10px 20px;
+    font-size: 0.85rem;
+  }
 }

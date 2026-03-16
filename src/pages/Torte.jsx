@@ -127,6 +127,18 @@ const Torte = () => {
           {/* PO VRSTI */}
           <div className="filter-row">
             <span className="filter-label">PO VRSTI:</span>
+            <select
+              className="filter-select-mobile"
+              value={aktivnaVrsta}
+              onChange={(e) => handleFilterChange("vrsta", e.target.value)}
+            >
+              <option value="sve">Sve vrste</option>
+              {vrste.map((v) => (
+                <option key={v.id} value={v.id.toString()}>
+                  {v.name}
+                </option>
+              ))}
+            </select>
             <div className="filter-pills secondary">
               <button
                 className={aktivnaVrsta === "sve" ? "pill active" : "pill"}
@@ -183,6 +195,7 @@ const Torte = () => {
                   </span>
                   <span className="torta-size">{torta.acf.velicina_torte}</span>
                 </div>
+                <button className="btn-view-details mt-3">Pogledaj detalje</button>
               </div>
             </div>
           ))}

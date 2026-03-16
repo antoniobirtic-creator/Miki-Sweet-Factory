@@ -150,6 +150,7 @@ const Kolaci = () => {
                     Min: {kolac.acf.min_narudzba || "-"}
                   </span>
                 </div>
+                <button className="btn-view-details mt-3">Pogledaj detalje</button>
               </div>
             </div>
           ))}
